@@ -1,0 +1,34 @@
+{{define "tambah_data_admin"}}
+    {{template "_top-wrapper"}}
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tambah Data Admin</h4>
+                <p class="card-description">
+                    Masukan Data Admin Disini
+                </p>
+                <form class="forms-sample" method="post" action="/admin/data-admin/tambah">
+                    <div class="form-group">
+                        <label for="">Nama Depan</label>
+                        <input type="text" name="nama_depan" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="">Nama Belakang</label>
+                        <input type="text" name="nama_belakang" class="form-control">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputUsername1">Username</label>
+                        <input type="text" name="username" class="form-control" id="exampleInputUsername1" placeholder="Username">
+                    </div>
+                    <div class="form-group">
+                        <label for="exampleInputPassword1">Password</label>
+                        <input type="password" name="password" class="form-control" id="exampleInputPassword1" placeholder="Password">
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{template "_bottom-wrapper"}}
+{{end}}
