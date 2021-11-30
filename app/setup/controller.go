@@ -17,9 +17,16 @@ func LoginController() controller.Login {
 	return controller
 }
 
-func CrudAdminController() controller.AdminCrudAdmin {
-	repo := repository.NewAdmin()
+func CrudAdminController() controller.AdminCrud {
+	repo := repository.NewUser()
 	service := service2.NewAdmin(helper.Connection(),valid,repo)
 	controller := controller.NewAdmin(service)
 	return controller
 }
+
+//func CrudGuruController() controller.AdminCrud {
+//	repo := repository.NewUser()
+//	service := service2.NewCrudGuru(helper.Connection(),valid,repo)
+//	controller := controller.NewCrudGuru(service)
+//	return controller
+//}

@@ -2,75 +2,79 @@ package controller
 
 import (
 	"github.com/gorilla/mux"
-	request2 "github.com/rizface/sekolah/app/request"
+	request2 "github.com/rizface/sekolah/app/model/request"
 	"github.com/rizface/sekolah/core/service"
 	"github.com/rizface/sekolah/helper"
 	"net/http"
 )
 
 type admin struct {
-	service service.AdminCrudAdmin
+	service service.AdminCrud
 }
 
-func NewAdmin(service service.AdminCrudAdmin) AdminCrudAdmin {
-	return admin{
+func NewAdmin(service service.AdminCrud) AdminCrud {
+	return &admin{
 		service: service,
 	}
 }
 
-func (a admin) Get(w http.ResponseWriter, r *http.Request) {
-	tmp := helper.View("view/admin/admin/index.gohtml")
-	admin := a.service.Get()
-	err := tmp.ExecuteTemplate(w, "data_admin_index", map[string]interface{}{
-		"admin": admin,
+
+func (a *admin) Get(w http.ResponseWriter, r *http.Request) {
+	tmp := helper.View(helper.GetHeader(r,"X-INDEX"))
+	user := a.service.Get(helper.GetHeader(r,"X-ROLE"))
+	err := tmp.Exec(w,r,helper.GetHeader(r,"X-INDEX-VIEW-NAME"),map[string]interface{}{
+		"data": user,
 	})
 	helper.PanicIfError(err)
 }
 
-func (a admin) PostPage(w http.ResponseWriter, r *http.Request) {
-	tmp := helper.View("view/admin/admin/tambah.gohtml")
-	err := tmp.ExecuteTemplate(w,"tambah_data_admin",nil)
+func (a *admin) PostPage(w http.ResponseWriter, r *http.Request) {
+	tmp := helper.View(helper.GetHeader(r,"X-POST-PAGE"))
+	err := tmp.Exec(w,r,helper.GetHeader(r,"X-POST-PAGE-VIEW-NAME"),nil)
 	helper.PanicIfError(err)
 }
 
-func (a admin) Post(w http.ResponseWriter, r *http.Request) {
-	request := request2.Admin{
+func (a *admin) Post(w http.ResponseWriter, r *http.Request) {
+	request := request2.User{
 		NamaDepan:    r.PostFormValue("nama_depan"),
 		NamaBelakang: r.PostFormValue("nama_belakang"),
 		Username:     r.PostFormValue("username"),
 		Password:     r.PostFormValue("password"),
 	}
-	result := a.service.Post(request)
+	result := a.service.Post(request,helper.GetHeader(r, "X-ROLE"))
 	helper.Notif("Notification", result)
-	http.Redirect(w,r,"/admin/data-admin",http.StatusSeeOther)
+	http.Redirect(w,r,helper.GetHeader(r,"X-INDEX-PATH"),http.StatusSeeOther)
 }
 
-func (a admin) UpdatePage(w http.ResponseWriter, r *http.Request) {
+func (a *admin) UpdatePage(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	admin := a.service.GetById(params["adminId"])
-	tmp := helper.View("view/admin/admin/update.gohtml")
-	tmp.ExecuteTemplate(w,"update_data_admin",map[string]interface{} {
-		"admin": admin,
+	user := a.service.GetById(params["userId"])
+	tmp := helper.View(helper.GetHeader(r,"X-UPDATE-PAGE"))
+	err := tmp.Exec(w,r,helper.GetHeader(r,"X-UPDATE-PAGE-VIEW-NAME"),map[string]interface{} {
+		"data": user,
 	})
+	helper.PanicIfError(err)
 }
 
-func (a admin) Update(w http.ResponseWriter, r *http.Request) {
+func (a *admin) Update(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	request := request2.Admin{
+	request := request2.User{
 		NamaDepan:    r.PostFormValue("nama_depan"),
 		NamaBelakang: r.PostFormValue("nama_belakang"),
 		Username:     r.PostFormValue("username"),
 		Password:     r.PostFormValue("password"),
 	}
-	result := a.service.Update(params["adminId"],request)
+	userId := params["userId"]
+	result := a.service.Update(userId,request)
 	helper.Notif("Notification", result)
-	http.Redirect(w,r,"/admin/data-admin/update/"+params["adminId"],http.StatusSeeOther)
+	redirect := helper.GetHeader(r,"X-UPDATE-REDIRECT" + userId)
+	http.Redirect(w,r,redirect,http.StatusSeeOther)
 }
 
-func (a admin) Delete(w http.ResponseWriter, r *http.Request) {
+func (a *admin) Delete(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
-	adminId := params["adminId"]
-	result := a.service.Delete(adminId)
+	userId := params["userId"]
+	result := a.service.Delete(userId)
 	helper.Notif("Notification",result)
 	http.Redirect(w,r,r.Referer(),http.StatusSeeOther)
 }

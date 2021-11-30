@@ -1,8 +1,8 @@
 package service
 
 import (
+	"github.com/rizface/sekolah/app/model/request"
 	"github.com/rizface/sekolah/app/model/response"
-	"github.com/rizface/sekolah/app/request"
 )
 
 type Login interface {

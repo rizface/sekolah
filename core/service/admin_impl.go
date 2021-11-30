@@ -3,8 +3,8 @@ package service
 import (
 	"errors"
 	"github.com/go-playground/validator/v10"
+	"github.com/rizface/sekolah/app/model/request"
 	"github.com/rizface/sekolah/app/model/response"
-	"github.com/rizface/sekolah/app/request"
 	"github.com/rizface/sekolah/core/repository"
 	"github.com/rizface/sekolah/helper"
 	"gorm.io/gorm"
@@ -13,29 +13,29 @@ import (
 type admin struct{
 	db *gorm.DB
 	validate *validator.Validate
-	repo repository.AdminCrudAdmin
+	repo repository.AdminCrud
 }
 
-func NewAdmin(db *gorm.DB, validate *validator.Validate,repo repository.AdminCrudAdmin) AdminCrudAdmin {
-	return admin{
+func NewAdmin(db *gorm.DB, validate *validator.Validate,repo repository.AdminCrud) AdminCrud {
+	return &admin{
 		db:   db,
 		validate: validate,
 		repo: repo,
 	}
 }
 
-func (a admin) Get() []response.Admin {
-	result,err := a.repo.Get(a.db)
+func (a *admin) Get(level string) []response.User {
+	result,err := a.repo.Get(a.db,level)
 	helper.PanicIfError(err)
 	return result
 }
 
-func (a admin) Post(request request.Admin) string {
+func (a *admin) Post(request request.User, level string) string {
 	err := a.validate.Struct(request)
 	helper.PanicIfError(err)
 
 	request.Password = helper.GeneratePassword(request.Password)
-	success,err := a.repo.Post(request,a.db)
+	success,err := a.repo.Post(request,level,a.db)
 	helper.PanicIfError(err)
 
 	if success {
@@ -44,7 +44,7 @@ func (a admin) Post(request request.Admin) string {
 	return "admin gagal ditambahkan"
 }
 
-func (a admin) Delete(adminId interface{}) string {
+func (a *admin) Delete(adminId interface{}) string {
 	success,err := a.repo.Delete(a.db,adminId)
 	helper.PanicIfError(err)
 	if success {
@@ -53,8 +53,8 @@ func (a admin) Delete(adminId interface{}) string {
 	return "data admin gagal dihapus"
 }
 
-func (a admin) GetById(adminId interface{}) response.Admin {
-	admin,err := a.repo.GetById(a.db,adminId)
+func (a *admin) GetById(userId interface{}) response.User {
+	admin,err := a.repo.GetById(a.db,userId)
 	if err != nil {
 		if errors.Is(err,gorm.ErrRecordNotFound) {
 			panic(errors.New("data tidak ditemukan"))
@@ -65,7 +65,7 @@ func (a admin) GetById(adminId interface{}) response.Admin {
 	return admin
 }
 
-func (a admin) Update(adminId interface{}, request request.Admin) string {
+func (a *admin) Update(adminId interface{}, request request.User) string {
 	admin := a.GetById(adminId)
 	if len(request.Password) > 0 {
 		request.Password = helper.GeneratePassword(request.Password)

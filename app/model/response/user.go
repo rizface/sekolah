@@ -1,6 +1,6 @@
 package response
 
-type Admin struct {
+type User struct {
 	Id           string
 	NamaDepan    string
 	NamaBelakang string

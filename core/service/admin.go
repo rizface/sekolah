@@ -1,14 +1,14 @@
 package service
 
 import (
+	"github.com/rizface/sekolah/app/model/request"
 	"github.com/rizface/sekolah/app/model/response"
-	"github.com/rizface/sekolah/app/request"
 )
 
-type AdminCrudAdmin interface{
-	Get() []response.Admin
-	GetById(adminId interface{}) response.Admin
-	Post(request request.Admin) string
-	Delete(adminId interface{}) string
-	Update(adminId interface{}, request request.Admin) string
+type AdminCrud interface{
+	Get(level string) []response.User
+	GetById(userId interface{}) response.User
+	Post(request request.User, level string) string
+	Delete(userId interface{}) string
+	Update(userId interface{}, request request.User) string
 }

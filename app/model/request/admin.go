@@ -1,6 +1,6 @@
 package request
 
-type Admin struct {
+type User struct {
 	NamaDepan    string `validate:"required"`
 	NamaBelakang string
 	Username     string `validate:"required"`

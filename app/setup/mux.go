@@ -9,5 +9,6 @@ var R = mux.NewRouter()
 
 func init() {
 	R.Use(middleware.ErrorHandler)
+	R.Use(middleware.Extract)
 }
 
