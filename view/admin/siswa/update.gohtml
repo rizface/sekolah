@@ -1,4 +1,4 @@
-{{define "update_data_guru"}}
+{{define "update_data_siswa"}}
     {{template "_top-wrapper"}}
     <div class="col-md-12 grid-margin stretch-card">
         <div class="card">
@@ -7,7 +7,7 @@
                 <p class="card-description">
                     Update Data Guru Disini
                 </p>
-                <form class="forms-sample" method="post" action="/admin/data-guru/update/{{.data.Id}}">
+                <form class="forms-sample" method="post" action="/admin/data-siswa/update/{{.data.Id}}">
                     <div class="form-group">
                         <label for="">Nama Depan</label>
                         <input value="{{.data.NamaDepan}}" type="text" name="nama_depan" class="form-control">

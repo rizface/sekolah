@@ -29,6 +29,16 @@ func Extract(next http.Handler) http.Handler {
 			request.Header.Add("X-UPDATE-PAGE", "view/admin/guru/update.gohtml")
 			request.Header.Add("X-UPDATE-PAGE-VIEW-NAME","update_data_guru")
 			request.Header.Add("X-UPDATE-REDIRECT","/admin/data-guru/update/")
+		} else if strings.Contains(url, "data-siswa") {
+			request.Header.Add("X-ROLE", "murid")
+			request.Header.Add("X-INDEX", "view/admin/siswa/index.gohtml")
+			request.Header.Add("X-INDEX-VIEW-NAME","data_siswa_index")
+			request.Header.Add("X-POST-PAGE","view/admin/siswa/tambah.gohtml")
+			request.Header.Add("X-POST-PAGE-VIEW-NAME", "tambah_data_siswa")
+			request.Header.Add("X-INDEX-PATH", "/admin/data-siswa")
+			request.Header.Add("X-UPDATE-PAGE", "view/admin/siswa/update.gohtml")
+			request.Header.Add("X-UPDATE-PAGE-VIEW-NAME","update_data_siswa")
+			request.Header.Add("X-UPDATE-REDIRECT","/admin/data-siswa/update/")
 		}
 		next.ServeHTTP(writer,request)
 	})

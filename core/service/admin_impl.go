@@ -39,18 +39,18 @@ func (a *admin) Post(request request.User, level string) string {
 	helper.PanicIfError(err)
 
 	if success {
-		return "admin dengan nama " + request.NamaDepan + " " + request.NamaBelakang + " berhasil ditambahkan"
+		return "data dengan nama " + request.NamaDepan + " " + request.NamaBelakang + " berhasil ditambahkan"
 	}
-	return "admin gagal ditambahkan"
+	return "data gagal ditambahkan"
 }
 
 func (a *admin) Delete(adminId interface{}) string {
 	success,err := a.repo.Delete(a.db,adminId)
 	helper.PanicIfError(err)
 	if success {
-		return "data admin berhasl dihapus"
+		return "data berhasl dihapus"
 	}
-	return "data admin gagal dihapus"
+	return "data gagal dihapus"
 }
 
 func (a *admin) GetById(userId interface{}) response.User {
@@ -72,7 +72,7 @@ func (a *admin) Update(adminId interface{}, request request.User) string {
 	}
 	success := a.repo.Update(a.db,admin,request)
 	if success {
-		return "update data admin berhasil"
+		return "update data berhasil"
 	}
-	return "update data admin gagal"
+	return "update data gagal"
 }

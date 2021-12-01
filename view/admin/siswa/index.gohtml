@@ -1,0 +1,48 @@
+{{define "data_siswa_index"}}
+    {{template "_top-wrapper"}}
+
+    <div class="col-lg-12">
+        <div class="d-flex align-items-end flex-wrap">
+            <div class="mr-md-3 mr-xl-5">
+                <h2>Data Siswa,</h2>
+                <p class="mb-md-0">Lihat dan Modifikasi Data Siswa.</p>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4 class="card-title">Data Admin</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Nama Depan</th>
+                                <th>Nama Belakang</th>
+                                <th>Username</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {{range $guru := .data}}
+                                <tr>
+                                    <td>{{$guru.NamaDepan}}</td>
+                                    <td>{{$guru.NamaBelakang}}</td>
+                                    <td>{{$guru.Username}}</td>
+                                    <td>
+                                        <a onclick="return confirm('yakin akan menghapus data ini ?')" href="/admin/data-siswa/hapus/{{$guru.Id}}" class="btn btn-danger btn-sm">
+                                            Hapus
+                                        </a>
+                                        <a href="/admin/data-siswa/update/{{$guru.Id}}" class="btn btn-primary btn-sm">
+                                            Update
+                                        </a>
+                                    </td>
+                                </tr>
+                            {{end}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{template "_bottom-wrapper"}}
+{{end}}

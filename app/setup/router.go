@@ -35,4 +35,11 @@ func Admin() {
 	r.HandleFunc(route.HAPUS_GURU,crudAdmin.Delete).Methods(http.MethodGet)
 	r.HandleFunc(route.UPDATE_GURU,crudAdmin.UpdatePage).Methods(http.MethodGet)
 	r.HandleFunc(route.UPDATE_GURU,crudAdmin.Update).Methods(http.MethodPost)
+
+	r.HandleFunc(route.SISWA_DASHBOARD, crudAdmin.Get).Methods(http.MethodGet)
+	r.HandleFunc(route.TAMBAH_SISWA,crudAdmin.PostPage).Methods(http.MethodGet)
+	r.HandleFunc(route.TAMBAH_SISWA,crudAdmin.Post).Methods(http.MethodPost)
+	r.HandleFunc(route.HAPUS_SISWA,crudAdmin.Delete).Methods(http.MethodGet)
+	r.HandleFunc(route.UPDATE_SISWA,crudAdmin.UpdatePage).Methods(http.MethodGet)
+	r.HandleFunc(route.UPDATE_SISWA,crudAdmin.Update).Methods(http.MethodPost)
 }

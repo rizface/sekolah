@@ -67,7 +67,7 @@ func (a *admin) Update(w http.ResponseWriter, r *http.Request) {
 	userId := params["userId"]
 	result := a.service.Update(userId,request)
 	helper.Notif("Notification", result)
-	redirect := helper.GetHeader(r,"X-UPDATE-REDIRECT" + userId)
+	redirect := helper.GetHeader(r,"X-UPDATE-REDIRECT") + userId
 	http.Redirect(w,r,redirect,http.StatusSeeOther)
 }
 
