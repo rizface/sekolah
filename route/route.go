@@ -28,4 +28,10 @@ const (
 	HAPUS_AKUNTANSI = "/admin/data-akuntansi/hapus/{userId}"
 	UPDATE_AKUNTANSI = "/admin/data-akuntansi/update/{userId}"
 
+	// kelola data kelas (CRUD)
+	KELAS_DASHBOARD = "/admin/data-kelas"
+	TAMBAH_KELAS = "/admin/data-kelas/tambah"
+	HAPUS_KELAS = "/admin/data-kelas/hapus/{kelasId}"
+	UPDATE_KELAS = "/admin/data-kelas/update/{kelasId}"
+
 )

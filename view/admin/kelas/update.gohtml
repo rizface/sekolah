@@ -1,0 +1,40 @@
+{{define "update_data_kelas"}}
+    {{template "_top-wrapper"}}
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tambah Data Kelas</h4>
+                <p class="card-description">
+                    Masukan Data Kelas Disini
+                </p>
+                <form class="forms-sample" method="post" action="/admin/data-kelas/update/{{.class.Id}}">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Tingkat</label>
+                                <select name="tingkat" class="form-control">
+                                    <option disabled  readonly selected>Pilih Tingkat Kelas</option>
+                                    <option value="X">X</option>
+                                    <option value="XI">XI</option>
+                                    <option value="XII">XII</option>
+                                </select>
+                                <small class="text-danger">
+                                    Tingkat Saat Ini Adalah {{.class.Tingkat}} Abaikan Jika Tidak Diganti
+                                </small>
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Nama Kelas</label>
+                                <input value="{{.class.Kelas}}" type="text" name="kelas" class="form-control" placeholder="Masukan Nama Kelas">
+                            </div>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{template "_bottom-wrapper"}}
+{{end}}

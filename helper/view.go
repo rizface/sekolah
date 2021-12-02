@@ -7,6 +7,11 @@ import (
 
 var tmp,_  = template.ParseGlob("view/wrapper/*.gohtml")
 
+func init() {
+	_,err := tmp.ParseFiles("view/nav/_footer.gohtml","view/nav/_navbar.gohtml")
+	PanicIfError(err)
+}
+
 type ExecView struct {
 	tmp *template.Template
 }
@@ -23,7 +28,7 @@ func(e *ExecView) Exec(w http.ResponseWriter,r *http.Request,name string, data m
 
 func View(viewPath string)  ExecView {
 	var admin ExecView
-	tmp.ParseGlob("view/nav/*.gohtml")
+	tmp.ParseFiles("view/nav/_sidebar.gohtml")
 	tmp.ParseGlob("view/partials/*.gohtml")
 	tmp,err := tmp.ParseFiles(viewPath)
 	PanicIfError(err)

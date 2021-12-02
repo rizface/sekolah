@@ -35,7 +35,7 @@ func TestFakerLevel(t *testing.T) {
 }
 
 func TestFakerAdmin(t *testing.T) {
-	//t.SkipNow()
+	t.SkipNow()
 	admin := app.User{
 		NamaDepan:    "muhammad",
 		NamaBelakang: "al farizzi",

@@ -24,6 +24,13 @@ func CrudAdminController() controller.AdminCrud {
 	return controller
 }
 
+func CrudKelasController() controller.AdminCrud {
+	repo := repository.NewKelas()
+	service := service2.NewKelas(helper.Connection(),valid,repo)
+	controller := controller.NewKelas(service)
+	return controller
+}
+
 //func CrudGuruController() controller.AdminCrud {
 //	repo := repository.NewUser()
 //	service := service2.NewCrudGuru(helper.Connection(),valid,repo)

@@ -50,4 +50,14 @@ func Admin() {
 	r.HandleFunc(route.HAPUS_AKUNTANSI,crudAdmin.Delete).Methods(http.MethodGet)
 	r.HandleFunc(route.UPDATE_AKUNTANSI,crudAdmin.UpdatePage).Methods(http.MethodGet)
 	r.HandleFunc(route.UPDATE_AKUNTANSI,crudAdmin.Update).Methods(http.MethodPost)
+
+	// CRUD KELAS
+	crudKelas := CrudKelasController()
+	r.HandleFunc(route.KELAS_DASHBOARD,crudKelas.Get).Methods(http.MethodGet)
+	r.HandleFunc(route.TAMBAH_KELAS, crudKelas.PostPage).Methods(http.MethodGet)
+	r.HandleFunc(route.TAMBAH_KELAS, crudKelas.Post).Methods(http.MethodPost)
+	r.HandleFunc(route.HAPUS_KELAS,crudKelas.Delete).Methods(http.MethodGet)
+	r.HandleFunc(route.UPDATE_KELAS,crudKelas.UpdatePage).Methods(http.MethodGet)
+	r.HandleFunc(route.UPDATE_KELAS,crudKelas.Update).Methods(http.MethodPost)
+
 }

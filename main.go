@@ -8,7 +8,7 @@ import (
 
 func init() {
 	db := helper.Connection()
-	err := db.AutoMigrate(&app.Level{},&app.User{})
+	err := db.AutoMigrate(&app.Level{},&app.User{},&app.Class{})
 	helper.PanicIfError(err)
 }
 
