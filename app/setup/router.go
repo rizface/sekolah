@@ -28,7 +28,6 @@ func Admin() {
 	r.HandleFunc(route.UPDATE_ADMIN,crudAdmin.Update).Methods(http.MethodPost)
 
 	// CRUD GURU
-	//crudGuru := CrudGuruController()
 	r.HandleFunc(route.GURU_DASHBOARD, crudAdmin.Get).Methods(http.MethodGet)
 	r.HandleFunc(route.TAMBAH_GURU,crudAdmin.PostPage).Methods(http.MethodGet)
 	r.HandleFunc(route.TAMBAH_GURU,crudAdmin.Post).Methods(http.MethodPost)
@@ -36,10 +35,19 @@ func Admin() {
 	r.HandleFunc(route.UPDATE_GURU,crudAdmin.UpdatePage).Methods(http.MethodGet)
 	r.HandleFunc(route.UPDATE_GURU,crudAdmin.Update).Methods(http.MethodPost)
 
+	// CRUD MURID
 	r.HandleFunc(route.SISWA_DASHBOARD, crudAdmin.Get).Methods(http.MethodGet)
 	r.HandleFunc(route.TAMBAH_SISWA,crudAdmin.PostPage).Methods(http.MethodGet)
 	r.HandleFunc(route.TAMBAH_SISWA,crudAdmin.Post).Methods(http.MethodPost)
 	r.HandleFunc(route.HAPUS_SISWA,crudAdmin.Delete).Methods(http.MethodGet)
 	r.HandleFunc(route.UPDATE_SISWA,crudAdmin.UpdatePage).Methods(http.MethodGet)
 	r.HandleFunc(route.UPDATE_SISWA,crudAdmin.Update).Methods(http.MethodPost)
+
+	// CRUD AKUNTANSI
+	r.HandleFunc(route.AKUNTANSI_DASHBOARD, crudAdmin.Get).Methods(http.MethodGet)
+	r.HandleFunc(route.TAMBAH_AKUNTANSI,crudAdmin.PostPage).Methods(http.MethodGet)
+	r.HandleFunc(route.TAMBAH_AKUNTANSI,crudAdmin.Post).Methods(http.MethodPost)
+	r.HandleFunc(route.HAPUS_AKUNTANSI,crudAdmin.Delete).Methods(http.MethodGet)
+	r.HandleFunc(route.UPDATE_AKUNTANSI,crudAdmin.UpdatePage).Methods(http.MethodGet)
+	r.HandleFunc(route.UPDATE_AKUNTANSI,crudAdmin.Update).Methods(http.MethodPost)
 }

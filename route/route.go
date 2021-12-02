@@ -21,4 +21,11 @@ const (
 	TAMBAH_SISWA = "/admin/data-siswa/tambah"
 	HAPUS_SISWA = "/admin/data-siswa/hapus/{userId}"
 	UPDATE_SISWA = "/admin/data-siswa/update/{userId}"
+
+	// kelola data akuntansi (CRUD)
+	AKUNTANSI_DASHBOARD = "/admin/data-akuntansi"
+	TAMBAH_AKUNTANSI = "/admin/data-akuntansi/tambah"
+	HAPUS_AKUNTANSI = "/admin/data-akuntansi/hapus/{userId}"
+	UPDATE_AKUNTANSI = "/admin/data-akuntansi/update/{userId}"
+
 )

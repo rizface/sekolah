@@ -24,6 +24,7 @@ require (
 	github.com/leodido/go-urn v1.2.1 // indirect
 	github.com/martinlindhe/notify v0.0.0-20181008203735-20632c9a275a // indirect
 	github.com/nu7hatch/gouuid v0.0.0-20131221200532-179d4d0c4d8d // indirect
+	github.com/sirupsen/logrus v1.8.1 // indirect
 	golang.org/x/crypto v0.0.0-20211117183948-ae814b36b871 // indirect
 	golang.org/x/sys v0.0.0-20210806184541-e5e7981a1069 // indirect
 	golang.org/x/text v0.3.7 // indirect
