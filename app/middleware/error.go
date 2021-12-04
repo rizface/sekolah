@@ -21,7 +21,7 @@ func ErrorHandler(next http.Handler) http.Handler {
 			err := recover()
 			if err != nil {
 				error := err.(error)
-				logger.WithError(error)
+				logger.Error(error)
 				if strings.Contains(error.Error(),"crypto/bcrypt") {
 					helper.Notif("Error", "Username / Password Salah")
 				} else{

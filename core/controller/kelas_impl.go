@@ -19,6 +19,12 @@ func NewKelas(service service.Kelas) AdminCrud {
 	}
 }
 
+func NewAssignStudent(kelas2 service.Kelas) Kelas {
+	return &kelas{
+		service: kelas2,
+	}
+}
+
 func (k *kelas) Get(w http.ResponseWriter, r *http.Request) {
 	classes := k.service.Get()
 	tmp := helper.View("view/admin/kelas/index.gohtml")
@@ -72,3 +78,36 @@ func (k *kelas) Delete(w http.ResponseWriter, r *http.Request) {
 	helper.Notif("Nitification",result)
 	http.Redirect(w,r,"/admin/data-kelas",http.StatusSeeOther)
 }
+
+
+// Students
+func (k *kelas) GetStudents(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	students,withoutClass := k.service.GetStudent(params["kelasId"])
+	tmp := helper.View("view/admin/kelas/siswa.gohtml")
+	err := tmp.Exec(w,r,"data_siswa_kelas",map[string]interface{} {
+		"data": students,
+		"noclass":withoutClass,
+		"kelasId": params["kelasId"],
+	})
+	helper.PanicIfError(err)
+}
+
+func (k *kelas) AddStudents(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	kelasId := params["kelasId"]
+	userId := params["userId"]
+	result := k.service.AddStudent(kelasId,userId)
+	helper.Notif("Notification",result)
+	http.Redirect(w,r,r.Referer(),http.StatusSeeOther)
+}
+
+func (k *kelas) DeleteStudents(W http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	kelasId := params["kelasId"]
+	userId := params["userId"]
+	result := k.service.DeleteStudent(kelasId,userId)
+	helper.Notif("Notication", result)
+	http.Redirect(W,r,r.Referer(),http.StatusSeeOther)
+}
+

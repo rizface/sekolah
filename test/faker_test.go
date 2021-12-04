@@ -35,14 +35,14 @@ func TestFakerLevel(t *testing.T) {
 }
 
 func TestFakerAdmin(t *testing.T) {
-	t.SkipNow()
+	//t.SkipNow()
 	admin := app.User{
 		NamaDepan:    "muhammad",
 		NamaBelakang: "al farizzi",
 		Username:     "admin",
 		Password:     helper.GeneratePassword("rahasia"),
-		LevelId:      "b39a2d92-8867-48ba-8cff-8b3de7191019",
-		GenderId:     "2069abf7-96ce-4a28-99e1-02c1e283fff2",
+		LevelId:      "8888308f-2d3f-465f-b4b3-d60877babf0a",
+		GenderId:     "f3128026-1992-45f9-8acc-b323abaf8d74",
 	}
 	db := helper.Connection()
 	db.Create(&admin)
