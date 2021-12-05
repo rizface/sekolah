@@ -38,6 +38,14 @@ func CrudAssignStudentToClass() controller.Kelas {
 	return controller
 }
 
+func CrudWalas() controller.WaliKelas {
+	walasRepo := repository.NewWaliKelas()
+	kelasRepo := repository.NewKelas()
+	service := service2.NewWaliKelas(helper.Connection(),kelasRepo,walasRepo)
+	controller := controller.NewWaliKelas(service)
+	return controller
+}
+
 
 //func CrudGuruController() controller.AdminCrud {
 //	repo := repository.NewUser()

@@ -1,0 +1,86 @@
+{{define "data_wali_kelas"}}
+    {{template "_top-wrapper"}}
+    <div class="col-lg-12">
+        <div class="d-flex align-items-end flex-wrap">
+            <div class="mr-md-3 mr-xl-5">
+                <h2>Data Wali Kelas,</h2>
+                <p class="mb-md-0">Lihat dan Modifikasi Data Wali Kelas.</p>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card mt-3">
+                    <div class="card-header bg-primary">
+                        <h3 class="card-title text-white">Wali Kelas</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table style="text-transform: capitalize" class="table table-hover">
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Kelas</th>
+                                    <th>Aksi</th>
+                                </tr>
+                                {{range .withClass}}
+                                    <tr>
+                                        <td>{{.NamaDepan}} {{.NamaBelakang}}</td>
+                                        <td>{{.Tingkat}} - {{.Kelas}}</td>
+                                        <td>
+                                            <a href="/admin/data-kelas/siswa/{{.KelasId}}" class="btn btn-success btn-sm">
+                                                Lihat Kelas
+                                            </a>
+                                        </td>
+                                        <td>
+                                            <a href="/admin/data-kelas/wali-kelas/hapus/walas/{{.Id}}/kelas/{{.KelasId}}" class="btn btn-danger btn-sm">
+                                                Hapus
+                                            </a>
+                                        </td>
+                                    </tr>
+                                {{end}}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                {{$kelas := .class}}
+                <div class="card mt-3">
+                    <div class="card-header bg-primary">
+                        <h3 class="card-title text-white">Guru Yang Tidak Menjadi Wali Kelas</h3>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table style="text-transform: capitalize" class="table table-hover">
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Pilih Kelas</th>
+                                    <th>Aksi</th>
+                                </tr>
+                                {{range .withoutClass}}
+                                    <tr>
+                                            <td>{{.NamaDepan}} {{.NamaBelakang}}</td>
+                                        <form action="/admin/data-kelas/wali-kelas" method="post">
+                                            <input type="hidden" name="idGuru" value="{{.Id}}">
+                                            <td>
+                                                <select class="form-control" name="idKelas" id="">
+                                                    {{ range $kelas}}
+                                                        <option value="{{.Id}}">{{.Tingkat}} - {{.Kelas}}</option>
+                                                    {{end}}
+                                                </select>
+                                            </td>
+                                            <td>
+                                                <button class="btn btn-primary btn-sm" type="submit">Tetapkan</button>
+                                            </td>
+                                        </form>
+                                    </tr>
+                                {{end}}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{template "_bottom-wrapper"}}
+{{end}}

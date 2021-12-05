@@ -8,6 +8,7 @@ import (
 
 type Kelas interface {
 	Get(db *gorm.DB) ([]response.Kelas,error)
+	GetWithoutWalas(db *gorm.DB) ([]response.Kelas,error)
 	GetById(kelasId string, db *gorm.DB) (response.Kelas,error)
 	GetStudents(kelasId string, db *gorm.DB) ([]response.User,error)
 	GetStudentsWithoutClass(db *gorm.DB) ([]response.User,error)

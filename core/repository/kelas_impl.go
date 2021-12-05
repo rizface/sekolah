@@ -19,6 +19,12 @@ func (k *kelas) Get(db *gorm.DB) ([]response.Kelas, error) {
 	return classes, result.Error
 }
 
+func (k *kelas) GetWithoutWalas(db *gorm.DB) ([]response.Kelas, error) {
+	var classes []response.Kelas
+	result := db.Where("teacher_classes.class_id IS NULL").Joins("LEFT JOIN teacher_classes ON teacher_classes.class_id = classes.id").Find(&[]app.Class{}).Scan(&classes)
+	return classes,result.Error
+}
+
 func (k *kelas) GetById(kelasId string,db *gorm.DB) (response.Kelas,error) {
 	var class response.Kelas
 	result := db.Where("id = ?",kelasId).First(&app.Class{}).Scan(&class)

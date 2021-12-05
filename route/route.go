@@ -31,10 +31,18 @@ const (
 	// kelola data kelas (CRUD)
 	KELAS_DASHBOARD = "/admin/data-kelas"
 	TAMBAH_KELAS = "/admin/data-kelas/tambah"
-	TAMBAH_ANGGOTA_KELAS = "/admin/data-kelas/tambah-anggota/kelas/{kelasId}/siswa/{userId}"
-	HAPUS_ANGGOTA_KELAS = "/admin/data-kelas/hapus-anggota/kelas/{kelasId}/siswa/{userId}"
 	HAPUS_KELAS = "/admin/data-kelas/hapus/{kelasId}"
 	UPDATE_KELAS = "/admin/data-kelas/update/{kelasId}"
+
+	// Anggota Kelas
+	TAMBAH_ANGGOTA_KELAS = "/admin/data-kelas/tambah-anggota/kelas/{kelasId}/siswa/{userId}"
+	HAPUS_ANGGOTA_KELAS = "/admin/data-kelas/hapus-anggota/kelas/{kelasId}/siswa/{userId}"
 	DATA_SISWA_KELAS = "/admin/data-kelas/siswa/{kelasId}"
+
+	// Wali Kelas
+	DATA_WALI_KELAS = "/admin/data-kelas/wali-kelas"
+	HAPUS_WALAS = "/admin/data-kelas/wali-kelas/hapus/walas/{userId}/kelas/{kelasId}"
+
+
 
 )

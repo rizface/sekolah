@@ -61,7 +61,11 @@ func Admin() {
 	r.HandleFunc(route.UPDATE_KELAS,crudKelas.Update).Methods(http.MethodPost)
 
 	crudAssign := CrudAssignStudentToClass()
+	crudWalas := CrudWalas()
 	r.HandleFunc(route.DATA_SISWA_KELAS,crudAssign.GetStudents).Methods(http.MethodGet)
 	r.HandleFunc(route.TAMBAH_ANGGOTA_KELAS,crudAssign.AddStudents).Methods(http.MethodPost)
 	r.HandleFunc(route.HAPUS_ANGGOTA_KELAS,crudAssign.DeleteStudents).Methods(http.MethodGet)
+	r.HandleFunc(route.DATA_WALI_KELAS,crudWalas.GetWaliKelas).Methods(http.MethodGet)
+	r.HandleFunc(route.DATA_WALI_KELAS,crudWalas.PostWaliKelas).Methods(http.MethodPost)
+	r.HandleFunc(route.HAPUS_WALAS,crudWalas.DeleteWaliKelas).Methods(http.MethodGet)
 }
