@@ -43,6 +43,10 @@ const (
 	DATA_WALI_KELAS = "/admin/data-kelas/wali-kelas"
 	HAPUS_WALAS = "/admin/data-kelas/wali-kelas/hapus/walas/{userId}/kelas/{kelasId}"
 
-
-
+	// Mata Pelajaran
+	DATA_MATA_PELAJARAN = "/admin/data-mata-pelajaran"
+	TAMBAH_MATA_PELAJARAN = "/admin/data-mata-pelajaran/tambah"
+	HAPUS_MATA_PELAJARAN = "/admin/data-mata-pelajaran/hapus/{mapelId}"
+	UPDATE_MATA_PELAJARAN = "/admin/data-mata-pelajaran/update/{mapelId}"
+	DATA_PENGAMPU = "/admin/data-mata-pelajaran/{mapelId}/guru"
 )

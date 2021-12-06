@@ -1,0 +1,43 @@
+{{define "data_mapel_index"}}
+    {{template "_top-wrapper"}}
+
+    <div class="col-lg-12">
+        <div class="d-flex align-items-end flex-wrap">
+            <div class="mr-md-3 mr-xl-5">
+                <h2>Data Mata Pelajaran,</h2>
+                <p class="mb-md-0">Lihat dan Modifikasi Data Mata Pelajaran.</p>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4 class="card-title">Data Mata Pelajaran</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover" style="text-transform: capitalize">
+                        <thead>
+                            <tr>
+                                <th>Mata Pelajaran</th>
+                                <th>Jumlah Guru Pengampu</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                        {{range .mapel}}
+                            <tr>
+                                <td>{{.Subject}}</td>
+                                <td>{{.JumlahGuru}} Guru</td>
+                                <td>
+                                    <a onclick="return confirm('yakin ingin menghapus data ini ?')" href="/admin/data-mata-pelajaran/hapus/{{.Id}}" class="btn btn-danger btn-sm">Hapus</a>
+                                    <a href="/admin/data-mata-pelajaran/update/{{.Id}}" class="btn btn-primary btn-sm">Update</a>
+                                    <a href="/admin/data-mata-pelajaran/{{.Id}}/guru" class="btn btn-success btn-sm">Lihat Guru</a>
+                                </td>
+                            </tr>
+                        {{end}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{template "_bottom-wrapper"}}
+{{end}}

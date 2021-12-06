@@ -68,4 +68,17 @@ func Admin() {
 	r.HandleFunc(route.DATA_WALI_KELAS,crudWalas.GetWaliKelas).Methods(http.MethodGet)
 	r.HandleFunc(route.DATA_WALI_KELAS,crudWalas.PostWaliKelas).Methods(http.MethodPost)
 	r.HandleFunc(route.HAPUS_WALAS,crudWalas.DeleteWaliKelas).Methods(http.MethodGet)
+
+
+	// CRUD Mata Pelajaran
+	crudMapel := CrudMapel()
+	r.HandleFunc(route.DATA_MATA_PELAJARAN, crudMapel.Get).Methods(http.MethodGet)
+	r.HandleFunc(route.TAMBAH_MATA_PELAJARAN,crudMapel.PostPage).Methods(http.MethodGet)
+	r.HandleFunc(route.TAMBAH_MATA_PELAJARAN,crudMapel.Post).Methods(http.MethodPost)
+	r.HandleFunc(route.HAPUS_MATA_PELAJARAN,crudMapel.Delete).Methods(http.MethodGet)
+	r.HandleFunc(route.UPDATE_MATA_PELAJARAN,crudMapel.UpdatePage).Methods(http.MethodGet)
+	r.HandleFunc(route.UPDATE_MATA_PELAJARAN,crudMapel.Update).Methods(http.MethodPost)
+
+	crudPengampu := CrudPengampu()
+	r.HandleFunc(route.DATA_PENGAMPU, crudPengampu.GetPengampu).Methods(http.MethodGet)
 }

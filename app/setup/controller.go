@@ -46,6 +46,21 @@ func CrudWalas() controller.WaliKelas {
 	return controller
 }
 
+func CrudMapel() controller.AdminCrud {
+	repo := repository.NewMapel()
+	userRepo := repository.NewUser()
+	service := service2.NewMapel(helper.Connection(),valid,repo,userRepo)
+	controller := controller.NewMapel(service)
+	return controller
+}
+
+func CrudPengampu() controller.Mapel {
+	repo := repository.NewMapel()
+	userRepo := repository.NewUser()
+	service := service2.NewMapel(helper.Connection(),valid,repo,userRepo)
+	controller := controller.NewPengampu(service)
+	return controller
+}
 
 //func CrudGuruController() controller.AdminCrud {
 //	repo := repository.NewUser()

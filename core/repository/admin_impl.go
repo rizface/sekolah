@@ -16,14 +16,13 @@ func NewUser() AdminCrud {
 }
 
 func (a *admin) Get(db *gorm.DB, levelName string) ([]response.User,error) {
+	fmt.Println(levelName, "ini level")
 	var user []response.User
 	var level app.Level
 	result := db.Where("level = ?", levelName).First(&level)
-	fmt.Println(level.Id)
 	helper.PanicIfError(result.Error)
-	db.Find(&[]app.User{}).Where("level_id = ?", level.Id).Scan(&user)
-	fmt.Println(user)
-	return user,db.Error
+	result = db.Find(&[]app.User{}).Where("level_id = ?", level.Id).Scan(&user)
+	return user,result.Error
 }
 
 func (a *admin) Post(request request.User, levelName string,db *gorm.DB) (bool,error) {

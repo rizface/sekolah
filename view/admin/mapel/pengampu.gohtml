@@ -1,0 +1,68 @@
+{{define "data_pengampu"}}
+    {{template "_top-wrapper"}}
+
+    <div class="col-lg-12">
+        <div class="d-flex align-items-end flex-wrap">
+            <div class="mr-md-3 mr-xl-5">
+                <h2>Data PengampusMata Pelajaran,</h2>
+                <p class="mb-md-0">Lihat dan Modifikasi Data Pengampu Mata Pelajaran.</p>
+            </div>
+        </div>
+        {{$mapelId := .mapelId}}
+        {{$mapelId}}
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <div class="card-title text-white">Guru Pengampu Mata Pelajaran</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" style="text-transform: capitalize">
+                                <tr>
+                                    <th>Nama Dosen</th>
+                                    <th>Aksi</th>
+                                </tr>
+                                {{range .pengampu}}
+                                    <tr>
+                                        <td>{{.NamaDepan}} {{.NamaBelakang}}</td>
+                                        <td>
+                                            <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                        </td>
+                                    </tr>
+                                {{end}}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <div class="card-title text-white">Guru</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table table-hover" style="text-transform: capitalize">
+                                <tr>
+                                    <th>Nama</th>
+                                    <th>Aksi</th>
+                                </tr>
+                                {{range .guru}}
+                                    <tr>
+                                        <td>{{.NamaDepan}} {{.NamaBelakang}}</td>
+                                        <td>
+                                            <a href="" class="btn btn-primary btn-sm">Tetapkan</a>
+                                        </td>
+                                    </tr>
+                                {{end}}
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{template "_bottom-wrapper"}}
+{{end}}

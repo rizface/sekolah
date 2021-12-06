@@ -1,0 +1,22 @@
+{{define "tambah_mapel"}}
+    {{template "_top-wrapper"}}
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Tambah Mata Pelajaran</h4>
+                <p class="card-description">
+                    Masukan Data Mata Pelajaran Disini
+                </p>
+                <form class="forms-sample" method="post" action="/admin/data-mata-pelajaran/tambah">
+                    <div class="form-group">
+                        <label for="">Mata Pelajaran</label>
+                        <input type="text" name="mapel" class="form-control" placeholder="Mata Pelajaran">
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                    <button class="btn btn-light">Cancel</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{template "_bottom-wrapper"}}
+{{end}}
