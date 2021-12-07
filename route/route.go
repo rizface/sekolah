@@ -48,5 +48,9 @@ const (
 	TAMBAH_MATA_PELAJARAN = "/admin/data-mata-pelajaran/tambah"
 	HAPUS_MATA_PELAJARAN = "/admin/data-mata-pelajaran/hapus/{mapelId}"
 	UPDATE_MATA_PELAJARAN = "/admin/data-mata-pelajaran/update/{mapelId}"
+
+	// Pengampu
 	DATA_PENGAMPU = "/admin/data-mata-pelajaran/{mapelId}/guru"
+	HAPUS_PENGAMPU = "/admin/data-mata-pelajaran/hapus/mapel/{mapelId}/guru/{userId}"
+	TAMBAH_PENGAMPU = "/admin/data-mata-pelajaran/tambah/mapel/{mapelId}/guru/{userId}"
 )

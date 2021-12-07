@@ -81,4 +81,6 @@ func Admin() {
 
 	crudPengampu := CrudPengampu()
 	r.HandleFunc(route.DATA_PENGAMPU, crudPengampu.GetPengampu).Methods(http.MethodGet)
+	r.HandleFunc(route.HAPUS_PENGAMPU,crudPengampu.DeletePengampu).Methods(http.MethodGet)
+	r.HandleFunc(route.TAMBAH_PENGAMPU,crudPengampu.PostPengampu).Methods(http.MethodPost)
 }

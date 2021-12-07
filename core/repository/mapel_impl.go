@@ -31,6 +31,14 @@ func (m *mapel) GetPengampu(db *gorm.DB, mapelId string) ([]response.User, error
 	return teacher,result.Error
 }
 
+func (m *mapel) GetTeacher(db *gorm.DB, mapelId string) ([]response.User, error) {
+	var teacher []response.User
+	var level app.Level
+	db.Where("level = ?", "guru").First(&level)
+	result := db.Select("users.id,users.nama_depan,users.nama_belakang").Where("teacher_subjects.subject_id != ? OR teacher_subjects.subject_id IS NULL AND users.level_id = ?",mapelId,level.Id).Joins("LEFT JOIN teacher_subjects ON teacher_subjects.user_id = users.id ").Find(&[]app.User{}).Scan(&teacher)
+	return teacher,result.Error
+}
+
 func (m *mapel) Post(db *gorm.DB, request request.Mapel) (bool, error) {
 	result := db.Create(&app.Subject{
 		Subject:   request.Mapel,
@@ -38,9 +46,22 @@ func (m *mapel) Post(db *gorm.DB, request request.Mapel) (bool, error) {
 	return result.RowsAffected > 0, result.Error
 }
 
+func (m *mapel) PostPengampu(db *gorm.DB, mapelId string, userId string) (bool, error) {
+	result := db.Create(&app.TeacherSubject{
+		UserId:    userId,
+		SubjectId: mapelId,
+	})
+	return result.RowsAffected > 0, result.Error
+}
+
 func (m *mapel) Delete(db *gorm.DB, mapelId string) (bool, error) {
 	result := db.Where("id = ?",mapelId).Delete(&app.Subject{})
 	return result.RowsAffected > 0,result.Error
+}
+
+func (m *mapel) DeletePengampu(db *gorm.DB, mapelId string, userId string) (bool, error) {
+	result := db.Where("subject_id = ? AND user_id = ?",mapelId,userId).Delete(&app.TeacherSubject{})
+	return result.RowsAffected > 0, result.Error
 }
 
 func (m *mapel) Update(db *gorm.DB, mapelId string, request request.Mapel) (bool, error) {

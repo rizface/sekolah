@@ -16,14 +16,12 @@ type mapel struct {
 	db       *gorm.DB
 	validate *validator.Validate
 	repo     repository.Mapel
-	userRepo repository.AdminCrud
 }
 
-func NewMapel(db *gorm.DB, validate *validator.Validate, repo repository.Mapel, userRepo repository.AdminCrud) Mapel {
+func NewMapel(db *gorm.DB, validate *validator.Validate, repo repository.Mapel) Mapel {
 	return &mapel{
 		db:       db,
 		validate: validate,
-		userRepo: userRepo,
 		repo:     repo,
 	}
 }
@@ -59,7 +57,7 @@ func (m *mapel) GetPengampu(mapelId string) ([]response.User,[]response.User) {
 	}(&wg)
 	go func(wg *sync.WaitGroup){
 		defer wg.Done()
-		guru,err = m.userRepo.Get(m.db,"guru")
+		guru,err = m.repo.GetTeacher(m.db,mapelId)
 		helper.PanicIfError(err)
 	}(&wg)
 	wg.Wait()
@@ -77,6 +75,15 @@ func (m *mapel) Post(request request.Mapel) string {
 	return fmt.Sprintf("mata pelajaran %s gagal ditambahkan", request.Mapel)
 }
 
+func (m *mapel) PostPengampu(mapelId string, userId string) string {
+	success,err := m.repo.PostPengampu(m.db,mapelId,userId)
+	helper.PanicIfError(err)
+	if success {
+		return "data berhasil ditambahkan"
+	}
+	return "data gagal ditambahkan"
+}
+
 func (m *mapel) Delete(mapelId string) string {
 	success,err := m.repo.Delete(m.db,mapelId)
 	helper.PanicIfError(err)
@@ -84,6 +91,15 @@ func (m *mapel) Delete(mapelId string) string {
 		return "mata pelajaran berhasil dihapus"
 	}
 	return "mata pelajaran gagal dihapus"
+}
+
+func (m *mapel) DeletePengampu(mapelId string, userId string) string {
+	success,err := m.repo.DeletePengampu(m.db,mapelId,userId)
+	helper.PanicIfError(err)
+	if success {
+		return "data berhasil dihapus"
+	}
+	return "data gagal dihapus"
 }
 
 func (m *mapel) Update(mapelId string,request request.Mapel) string {

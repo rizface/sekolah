@@ -9,8 +9,7 @@
             </div>
         </div>
         {{$mapelId := .mapelId}}
-        {{$mapelId}}
-        <div class="row">
+        <div class="row mt-3">
             <div class="col-md-6">
                 <div class="card">
                     <div class="card-header bg-primary">
@@ -27,7 +26,7 @@
                                     <tr>
                                         <td>{{.NamaDepan}} {{.NamaBelakang}}</td>
                                         <td>
-                                            <a href="" class="btn btn-danger btn-sm">Hapus</a>
+                                            <a onclick="return confirm('Yakin Akan Mengahapus Data Ini ?')" href="/admin/data-mata-pelajaran/hapus/mapel/{{$mapelId}}/guru/{{.Id}}" class="btn btn-danger btn-sm">Hapus</a>
                                         </td>
                                     </tr>
                                 {{end}}
@@ -52,7 +51,9 @@
                                     <tr>
                                         <td>{{.NamaDepan}} {{.NamaBelakang}}</td>
                                         <td>
-                                            <a href="" class="btn btn-primary btn-sm">Tetapkan</a>
+                                            <form method="post" action="/admin/data-mata-pelajaran/tambah/mapel/{{$mapelId}}/guru/{{.Id}}">
+                                                <button type="submit" class="btn btn-primary btn-sm">Tetapkan</button>
+                                            </form>
                                         </td>
                                     </tr>
                                 {{end}}

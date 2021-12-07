@@ -10,6 +10,8 @@ type Mapel interface {
 	GetById(mapelId string) response.Mapel
 	GetPengampu(mapelId string) ([]response.User,[]response.User)
 	Post(request request.Mapel) string
+	PostPengampu(mapelId string, userId string) string
 	Delete(mapelId string) string
+	DeletePengampu(mapelId string, userId string) string
 	Update(mapelId string,request request.Mapel) string
 }

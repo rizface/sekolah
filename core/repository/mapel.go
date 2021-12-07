@@ -10,7 +10,10 @@ type Mapel interface {
 	Get(db *gorm.DB) ([]response.Mapel,error)
 	GetById(db *gorm.DB, mapelId string) (response.Mapel,error)
 	GetPengampu(db *gorm.DB, mapelId string) ([]response.User,error)
+	GetTeacher(db *gorm.DB, mapelId string) ([]response.User,error)
 	Post(db *gorm.DB,request request.Mapel) (bool,error)
+	PostPengampu(db *gorm.DB, mapelId string, userId string) (bool,error)
 	Delete(db *gorm.DB, mapelId string) (bool,error)
+	DeletePengampu(db *gorm.DB, mapelId string, userId string) (bool,error)
 	Update(db *gorm.DB, mapelId string, request request.Mapel) (bool,error)
 }

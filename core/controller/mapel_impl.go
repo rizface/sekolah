@@ -91,3 +91,23 @@ func (m *mapel) GetPengampu(w http.ResponseWriter, r *http.Request) {
 	})
 	helper.PanicIfError(err)
 }
+
+func (m *mapel) DeletePengampu(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	mapelId := params["mapelId"]
+	userId := params["userId"]
+	result := m.service.DeletePengampu(mapelId,userId)
+	helper.Notif("Notification",result)
+	http.Redirect(w,r,r.Referer(),http.StatusSeeOther)
+}
+
+func (m *mapel) PostPengampu(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	mapelId := params["mapelId"]
+	userId := params["userId"]
+	result := m.service.PostPengampu(mapelId,userId)
+	helper.Notif("Notification",result)
+	http.Redirect(w,r,r.Referer(),http.StatusSeeOther)
+}
+
+
