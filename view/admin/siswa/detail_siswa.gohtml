@@ -1,0 +1,62 @@
+{{define "detail_siswa"}}
+    {{template "_top-wrapper"}}
+
+    <div class="col-lg-12">
+        <div class="d-flex align-items-end flex-wrap">
+            <div class="mr-md-3 mr-xl-5">
+                <h2>Detail Siswa,</h2>
+                <p class="mb-md-0">Lihat dan Modifikasi Detail Siswa.</p>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4 class="card-title">Data Nilai Persemester</h4>
+                <form action="">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <select class="form-control" name="semester" id="">
+                                <option value="">All</option>
+                                <option value="semester 1">Semester 1</option>
+                                <option value="semester 2">Semester 2</option>
+                                <option value="semester 3">Semester 3</option>
+                                <option value="semester 4">Semester 4</option>
+                                <option value="semester 5">Semester 5</option>
+                                <option value="semester 6">Semester 6</option>
+                            </select>
+                        </div>
+                    </div>
+                    <button type="submit" class="mt-2 btn btn-primary btn-sm">Filter</button>
+                </form>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Semester</th>
+                            <th>Pelajaran</th>
+                            <th>Nilai</th>
+                            <th>Tanggal</th>
+                            <th>Aksi</th>
+                        </tr>
+                        </thead>
+                        <tbody style="text-transform: capitalize">
+                            {{range .grades}}
+                                <tr>
+                                    <td>{{.Semester}}</td>
+                                    <td>{{.Subject}}</td>
+                                    <td>{{.Grade}}</td>
+                                    <td>{{.Date}}</td>
+                                    <td>
+                                        <a onclick="return confirm('Yakin Akan Menghapus Data Ini ?')" href="/admin/data-siswa/nilai/hapus/{{.Id}}" class="btn btn-danger btn-sm">Hapus</a>
+                                        <a href="/admin/data-siswa/nilai/update/{{.Id}}" class="btn btn-primary btn-sm">Update</a>
+                                    </td>
+                                </tr>
+                            {{end}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{template "_bottom-wrapper"}}
+{{end}}

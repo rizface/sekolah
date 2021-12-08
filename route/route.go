@@ -38,6 +38,7 @@ const (
 	TAMBAH_ANGGOTA_KELAS = "/admin/data-kelas/tambah-anggota/kelas/{kelasId}/siswa/{userId}"
 	HAPUS_ANGGOTA_KELAS = "/admin/data-kelas/hapus-anggota/kelas/{kelasId}/siswa/{userId}"
 	DATA_SISWA_KELAS = "/admin/data-kelas/siswa/{kelasId}"
+	DETAIL_SISWA_KELAS = "/admin/data-kelas/siswa/detail/{userId}"
 
 	// Wali Kelas
 	DATA_WALI_KELAS = "/admin/data-kelas/wali-kelas"
@@ -53,4 +54,9 @@ const (
 	DATA_PENGAMPU = "/admin/data-mata-pelajaran/{mapelId}/guru"
 	HAPUS_PENGAMPU = "/admin/data-mata-pelajaran/hapus/mapel/{mapelId}/guru/{userId}"
 	TAMBAH_PENGAMPU = "/admin/data-mata-pelajaran/tambah/mapel/{mapelId}/guru/{userId}"
+
+	// Nilai Siswa
+	INPUT_NILAI_SISWA = "/admin/data-siswa/nilai/siswa/{userId}"
+	HAPUS_NILAI_SISWA = "/admin/data-siswa/nilai/hapus/{gradeId}"
+	UPDATE_NILAI_SISWA = "/admin/data-siswa/nilai/update/{gradeId}"
 )

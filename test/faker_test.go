@@ -34,6 +34,30 @@ func TestFakerLevel(t *testing.T) {
 	db.Create(&Level)
 }
 
+func TestFakerSemester(t *testing.T) {
+	db := helper.Connection()
+	db.Create(&[]app.Semester{
+		app.Semester{
+			Semester: "semester 1",
+		},
+		app.Semester{
+			Semester: "semester 2",
+		},
+		app.Semester{
+			Semester: "semester 3",
+		},
+		app.Semester{
+			Semester: "semester 4",
+		},
+		app.Semester{
+			Semester: "semester 5",
+		},
+		app.Semester{
+			Semester: "semester 6",
+		},
+	})
+}
+
 func TestFakerAdmin(t *testing.T) {
 	//t.SkipNow()
 	admin := app.User{

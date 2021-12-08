@@ -11,6 +11,7 @@ import (
 
 type kelas struct {
 	service service.Kelas
+	nilaiService service.NilaiSiswa
 }
 
 func NewKelas(service service.Kelas) AdminCrud {
@@ -19,9 +20,10 @@ func NewKelas(service service.Kelas) AdminCrud {
 	}
 }
 
-func NewAssignStudent(kelas2 service.Kelas) Kelas {
+func NewAssignStudent(kelas2 service.Kelas, nilaiService service.NilaiSiswa) Kelas {
 	return &kelas{
 		service: kelas2,
+		nilaiService: nilaiService,
 	}
 }
 
@@ -110,4 +112,17 @@ func (k *kelas) DeleteStudents(W http.ResponseWriter, r *http.Request) {
 	helper.Notif("Notication", result)
 	http.Redirect(W,r,r.Referer(),http.StatusSeeOther)
 }
+
+func (k *kelas) DetailStudents(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	userId := params["userId"]
+	semester := r.URL.Query().Get("semester")
+	grade := k.nilaiService.GetNilaiBySemester(userId,semester)
+	tmp := helper.View("view/admin/siswa/detail_siswa.gohtml")
+	err := tmp.Exec(w,r,"detail_siswa",map[string]interface{}{
+		"grades":grade,
+	})
+	helper.PanicIfError(err)
+}
+
 
