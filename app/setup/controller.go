@@ -77,6 +77,13 @@ func CrudDetailSiswa() controller.DetailSiswa {
 	return controller
 }
 
+func CrudDetailPegawai() controller.DetailPegawai {
+	repo := repository.NewDetailPegawai()
+	service := service2.NewDetailPegawai(helper.Connection(),valid,repo)
+	controller := controller.NewDetailPegawai(service)
+	return controller
+}
+
 //func CrudGuruController() controller.AdminCrud {
 //	repo := repository.NewUser()
 //	service := service2.NewCrudGuru(helper.Connection(),valid,repo)

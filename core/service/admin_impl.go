@@ -65,18 +65,23 @@ func (a *admin) GetById(userId interface{}) response.User {
 	return admin
 }
 
+func checkErrorType(err error ) {
+	if err != nil {
+		if errors.Is(err,gorm.ErrRecordNotFound) == false {
+			helper.PanicIfError(err)
+		}
+	}
+}
+
 func (a *admin) DetailById(level string, userId string) interface{} {
 	var result interface{}
 	var err error
 	if level == "murid" {
 		result,err = a.repo.StudentDetail(a.db,userId)
-		if err != nil {
-			if errors.Is(err,gorm.ErrRecordNotFound) == false {
-				helper.PanicIfError(err)
-			}
-		}
+		checkErrorType(err)
 	} else {
-
+		result,err = a.repo.EmployeeDetail(a.db,userId)
+		checkErrorType(err)
 	}
 	return result
 }

@@ -93,4 +93,7 @@ func Admin() {
 
 	crudDetailSiswa := CrudDetailSiswa()
 	r.HandleFunc(route.UPDATE_DETAIL_SISWA,crudDetailSiswa.Update).Methods(http.MethodPost)
+
+	crudDetailPegawai := CrudDetailPegawai()
+	r.HandleFunc(route.UPDATE_DETAIL_PEGAWAI,crudDetailPegawai.Post).Methods(http.MethodPost)
 }

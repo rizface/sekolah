@@ -31,6 +31,12 @@ func (a *admin) StudentDetail(db *gorm.DB,userId string) (response.DetailSiswa, 
 	return detail,result.Error
 }
 
+func (a *admin) EmployeeDetail(db *gorm.DB, userId string) (response.DetailPegawai, error) {
+	var detail response.DetailPegawai
+	result := db.Where("user_id = ?",userId).First(&app.DetailEmployee{}).Scan(&detail)
+	return detail,result.Error
+}
+
 func (a *admin) TeacherDetail(userId string) {
 	panic("implement me")
 }
