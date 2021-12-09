@@ -70,6 +70,13 @@ func CrudNilaisiswa() controller.NilaiSiswa {
 	return controller
 }
 
+func CrudDetailSiswa() controller.DetailSiswa {
+	repo := repository.NewDetailSiswa()
+	service := service2.NewDetailSiswa(helper.Connection(),valid,repo)
+	controller := controller.NewDetailSiswa(service)
+	return controller
+}
+
 //func CrudGuruController() controller.AdminCrud {
 //	repo := repository.NewUser()
 //	service := service2.NewCrudGuru(helper.Connection(),valid,repo)

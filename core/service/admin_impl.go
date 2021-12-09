@@ -65,6 +65,22 @@ func (a *admin) GetById(userId interface{}) response.User {
 	return admin
 }
 
+func (a *admin) DetailById(level string, userId string) interface{} {
+	var result interface{}
+	var err error
+	if level == "murid" {
+		result,err = a.repo.StudentDetail(a.db,userId)
+		if err != nil {
+			if errors.Is(err,gorm.ErrRecordNotFound) == false {
+				helper.PanicIfError(err)
+			}
+		}
+	} else {
+
+	}
+	return result
+}
+
 func (a *admin) Update(adminId interface{}, request request.User) string {
 	admin := a.GetById(adminId)
 	if len(request.Password) > 0 {

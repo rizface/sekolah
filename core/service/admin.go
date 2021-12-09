@@ -8,6 +8,7 @@ import (
 type AdminCrud interface{
 	Get(level string) []response.User
 	GetById(userId interface{}) response.User
+	DetailById(level string,userId string) interface{}
 	Post(request request.User, level string) string
 	Delete(userId interface{}) string
 	Update(userId interface{}, request request.User) string

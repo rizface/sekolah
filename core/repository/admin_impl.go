@@ -25,6 +25,16 @@ func (a *admin) Get(db *gorm.DB, levelName string) ([]response.User,error) {
 	return user,result.Error
 }
 
+func (a *admin) StudentDetail(db *gorm.DB,userId string) (response.DetailSiswa, error) {
+	var detail response.DetailSiswa
+	result := db.Where("user_id = ?",userId).First(&app.DetailStudent{}).Scan(&detail)
+	return detail,result.Error
+}
+
+func (a *admin) TeacherDetail(userId string) {
+	panic("implement me")
+}
+
 func (a *admin) Post(request request.User, levelName string,db *gorm.DB) (bool,error) {
 	var level app.Level
 	var gender app.Gender

@@ -16,11 +16,12 @@ const (
 	HAPUS_GURU = "/admin/data-guru/hapus/{userId}"
 	UPDATE_GURU = "/admin/data-guru/update/{userId}"
 
-	// kelola data guru (CRUD)
+	// kelola data suswa (CRUD)
 	SISWA_DASHBOARD = "/admin/data-siswa"
 	TAMBAH_SISWA = "/admin/data-siswa/tambah"
 	HAPUS_SISWA = "/admin/data-siswa/hapus/{userId}"
 	UPDATE_SISWA = "/admin/data-siswa/update/{userId}"
+	UPDATE_DETAIL_SISWA = "/admin/data-siswa/update-detail/{userId}"
 
 	// kelola data akuntansi (CRUD)
 	AKUNTANSI_DASHBOARD = "/admin/data-akuntansi"

@@ -90,4 +90,7 @@ func Admin() {
 	r.HandleFunc(route.HAPUS_NILAI_SISWA,crudNilai.Delete).Methods(http.MethodGet)
 	r.HandleFunc(route.UPDATE_NILAI_SISWA,crudNilai.UpdateForm).Methods(http.MethodGet)
 	r.HandleFunc(route.UPDATE_NILAI_SISWA,crudNilai.Update).Methods(http.MethodPost)
+
+	crudDetailSiswa := CrudDetailSiswa()
+	r.HandleFunc(route.UPDATE_DETAIL_SISWA,crudDetailSiswa.Update).Methods(http.MethodPost)
 }
