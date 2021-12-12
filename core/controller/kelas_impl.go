@@ -13,7 +13,8 @@ type kelas struct {
 	service service.Kelas
 	nilaiService service.NilaiSiswa
 	userService service.AdminCrud
-	detailService service.DetailSiswa
+	semesterService service.Semester
+	subjectService service.Mapel
 }
 
 func NewKelas(service service.Kelas) AdminCrud {

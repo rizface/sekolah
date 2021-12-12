@@ -83,14 +83,21 @@
                 <form action="">
                     <div class="row">
                         <div class="col-md-4">
+                            <label for="" class="text-muted">Semester</label>
                             <select class="form-control" name="semester" id="">
                                 <option value="">All</option>
-                                <option value="semester 1">Semester 1</option>
-                                <option value="semester 2">Semester 2</option>
-                                <option value="semester 3">Semester 3</option>
-                                <option value="semester 4">Semester 4</option>
-                                <option value="semester 5">Semester 5</option>
-                                <option value="semester 6">Semester 6</option>
+                                {{range .semesters}}
+                                    <option value="{{.Semester}}">{{.Semester}}</option>
+                                {{end}}
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <label for="" class="text-muted">Mata Pelajaran</label>
+                            <select name="subject" class="form-control">
+                                <option value="">All</option>
+                                {{range .subjects}}
+                                    <option value="{{.Id}}">{{.Subject}}</option>
+                                {{end}}
                             </select>
                         </div>
                     </div>

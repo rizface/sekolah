@@ -4,6 +4,7 @@ const (
 	LOGIN = "/"
 
 	// kelola data admin (CRUD)
+	ADMIN = "/admin"
 	ADMIN_DASHBOARD = "/admin/data-admin"
 	TAMBAH_ADMIN = "/admin/data-admin/tambah"
 	HAPUS_ADMIN = "/admin/data-admin/hapus/{userId}"

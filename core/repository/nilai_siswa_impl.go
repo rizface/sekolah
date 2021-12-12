@@ -1,7 +1,6 @@
 package repository
 
 import (
-	"fmt"
 	"github.com/rizface/sekolah/app/model/app"
 	"github.com/rizface/sekolah/app/model/request"
 	"github.com/rizface/sekolah/app/model/response"
@@ -34,9 +33,22 @@ func (n nilaiSiswa) GetAllGrade(db *gorm.DB, userId string) ([]response.Nilai, e
 func (n nilaiSiswa) GetGradeBySemester(db *gorm.DB, userId string,semester string) ([]response.Nilai, error) {
 	var sData app.Semester
 	db.Where("semester = ?",semester).First(&sData)
-	fmt.Println("userId :",userId,"semester :", sData.Semester)
 	var grade []response.Nilai
 	result := db.Select("grades.id,subjects.subject,semesters.semester,grades.grade, TO_CHAR(grades.created_at :: DATE,'dd Monthyyyy') AS date").Order("grades.created_at DESC").Joins("INNER JOIN subjects ON subjects.id = grades.subject_id").Joins("INNER JOIN semesters ON semesters.id = grades.semester_id").Where("grades.student_id = ? AND grades.semester_id = ?",userId,sData.Id).Find(&[]app.Grade{}).Scan(&grade)
+	return grade,result.Error
+}
+
+func (n nilaiSiswa) GetGradeBySubject(db *gorm.DB, userId string, subject string) ([]response.Nilai, error) {
+	var grade []response.Nilai
+	result := db.Select("grades.id,subjects.subject,semesters.semester,grades.grade, TO_CHAR(grades.created_at :: DATE,'dd Monthyyyy') AS date").Order("grades.created_at DESC").Joins("INNER JOIN subjects ON subjects.id = grades.subject_id").Joins("INNER JOIN semesters ON semesters.id = grades.semester_id").Where("grades.student_id = ? AND grades.subject_id = ?",userId,subject).Find(&[]app.Grade{}).Scan(&grade)
+	return grade,result.Error
+}
+
+func (n nilaiSiswa) GetGradeSubjectSemester(db *gorm.DB, userId string, semester string, subjectId string) ([]response.Nilai, error) {
+	var sData app.Semester
+	db.Where("semester = ?",semester).First(&sData)
+	var grade []response.Nilai
+	result := db.Select("grades.id,subjects.subject,semesters.semester,grades.grade, TO_CHAR(grades.created_at :: DATE,'dd Monthyyyy') AS date").Order("grades.created_at DESC").Joins("INNER JOIN subjects ON subjects.id = grades.subject_id").Joins("INNER JOIN semesters ON semesters.id = grades.semester_id").Where("grades.student_id = ? AND grades.semester_id = ? AND grades.subject_id = ?",userId,sData.Id,subjectId).Find(&[]app.Grade{}).Scan(&grade)
 	return grade,result.Error
 }
 

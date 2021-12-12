@@ -39,6 +39,7 @@ func (a *admin) Post(w http.ResponseWriter, r *http.Request) {
 		NamaBelakang: r.PostFormValue("nama_belakang"),
 		Username:     r.PostFormValue("username"),
 		Password:     r.PostFormValue("password"),
+		JenisKelamin: r.PostFormValue("gender"),
 	}
 	result := a.service.Post(request, helper.GetHeader(r, "X-ROLE"))
 	helper.Notif("Notification", result)

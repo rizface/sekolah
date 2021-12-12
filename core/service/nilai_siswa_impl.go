@@ -2,7 +2,6 @@ package service
 
 import (
 	"errors"
-	"fmt"
 	"github.com/go-playground/validator/v10"
 	"github.com/rizface/sekolah/app/model/request"
 	"github.com/rizface/sekolah/app/model/response"
@@ -48,15 +47,23 @@ func (n *nilaiSiswa) GetData() ([]response.Mapel, []response.Semester) {
 	return mapel, semester
 }
 
-func (n *nilaiSiswa) GetNilaiBySemester(userId string,semester string) []response.Nilai {
+func (n *nilaiSiswa) GetNilai(userId string,semester string, subject string) []response.Nilai {
 	var result []response.Nilai
 	var err error
-	if len(semester) == 0 {
+	semesterLen := len(semester)
+	subjectLen := len(subject)
+
+	if semesterLen == 0 && subjectLen == 0{
 		result,err = n.repo.GetAllGrade(n.db,userId)
 		helper.PanicIfError(err)
-	} else {
-		fmt.Println(semester, "ini lho")
+	} else if semesterLen != 0 && subjectLen == 0{
 		result,err = n.repo.GetGradeBySemester(n.db,userId,semester)
+		helper.PanicIfError(err)
+	} else if semesterLen == 0 && subjectLen != 0 {
+		result,err = n.repo.GetGradeBySubject(n.db,userId,subject)
+		helper.PanicIfError(err)
+	} else if semesterLen != 0 && subjectLen != 0 {
+		result,err = n.repo.GetGradeSubjectSemester(n.db,userId,semester,subject)
 		helper.PanicIfError(err)
 	}
 	return result

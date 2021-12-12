@@ -1,0 +1,38 @@
+{{define "admin"}}
+    {{template "_top-wrapper"}}
+    <style>
+        p.dynamic {
+            font-size: 30px;
+            font-size: 4vw;
+        }
+        p.dynamic2 {
+            font-size: 30px;
+            font-size: 2vw;
+        }
+    </style>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="card">
+                    <div class="card-header bg-primary">
+                        <h4 class="text-white">Jumlah Siswa</h4>
+                    </div>
+                    <div class="card-body">
+                       <div class="row">
+                           <div class="col-md-6 mt-3">
+                               <p class="dynamic text-black-50 font-weight-bold">80</p>
+                           </div>
+                            <div class="col-md-6">
+                                <div class="row">
+                                    <p class="dynamic2 text-black-50 font-weight-bold">40 Laki-Laki</p>
+                                </div>
+                                <div class="row">
+                                    <p class="dynamic2 text-black-50 font-weight-bold">40 Perempuan</p>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    {{template "_bottom-wrapper"}}
+{{end}}

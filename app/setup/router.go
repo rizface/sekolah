@@ -18,7 +18,11 @@ func Admin() {
 	r := R.NewRoute().Subrouter()
 	r.Use(middleware.Admin)
 
-	// CRUD GURU
+	// Dashboard
+	dashboarad := Dashboard()
+	r.HandleFunc(route.ADMIN,dashboarad.DashboardAdmin).Methods(http.MethodGet)
+
+	// CRUD Admin
 	crudAdmin := CrudAdminController()
 	r.HandleFunc(route.ADMIN_DASHBOARD, crudAdmin.Get).Methods(http.MethodGet)
 	r.HandleFunc(route.TAMBAH_ADMIN,crudAdmin.PostPage).Methods(http.MethodGet)

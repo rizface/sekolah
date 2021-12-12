@@ -1,7 +1,6 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/rizface/sekolah/app/model/request"
 	"github.com/rizface/sekolah/core/service"
 	"github.com/rizface/sekolah/helper"
@@ -31,7 +30,6 @@ func (l login) Login(w http.ResponseWriter, r *http.Request) {
 		Username: r.PostFormValue("username"),
 		Password: r.PostFormValue("password"),
 	}
-	fmt.Println(loginPayload)
 	user := l.service.Login(loginPayload)
 	helper.CreateSession(w,r,user)
 	http.Redirect(w,r,"/"+user.Level,http.StatusSeeOther)

@@ -45,7 +45,7 @@ func (a *admin) Post(request request.User, levelName string,db *gorm.DB) (bool,e
 	var level app.Level
 	var gender app.Gender
 	result := db.Where("level = ?", levelName).First(&level)
-	result = db.Where("gender = ?", "laki-laki").First(&gender)
+	result = db.Where("gender = ?", request.JenisKelamin).First(&gender)
 	result = db.Create(&app.User{
 		NamaDepan:    request.NamaDepan,
 		NamaBelakang: request.NamaBelakang,

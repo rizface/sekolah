@@ -1,18 +1,19 @@
 package controller
 
 import (
-	"fmt"
 	"github.com/gorilla/mux"
 	"github.com/rizface/sekolah/core/service"
 	"github.com/rizface/sekolah/helper"
 	"net/http"
 )
 
-func NewAssignStudent(kelas2 service.Kelas, nilaiService service.NilaiSiswa, userService service.AdminCrud) Kelas {
+func NewAssignStudent(kelas2 service.Kelas, nilaiService service.NilaiSiswa, userService service.AdminCrud, semester service.Semester, subjectService service.Mapel) Kelas {
 	return &kelas{
 		service:       kelas2,
 		nilaiService:  nilaiService,
 		userService:   userService,
+		semesterService: semester,
+		subjectService: subjectService,
 	}
 }
 
@@ -50,15 +51,21 @@ func (k *kelas) DetailStudents(w http.ResponseWriter, r *http.Request) {
 	params := mux.Vars(r)
 	userId := params["userId"]
 	semester := r.URL.Query().Get("semester")
-	grade := k.nilaiService.GetNilaiBySemester(userId, semester)
+	subject := r.URL.Query().Get("subject")
+
+	grade := k.nilaiService.GetNilai(userId, semester, subject)
 	data := k.userService.GetById(userId)
+	semesters:= k.semesterService.GetSemester()
+	subjects := k.subjectService.Get()
 	detail := k.userService.DetailById("murid", userId)
-	fmt.Println(detail)
+
 	tmp := helper.View("view/admin/siswa/detail_siswa.gohtml")
 	err := tmp.Exec(w, r, "detail_siswa", map[string]interface{}{
 		"grades": grade,
 		"data":   data,
 		"detail": detail,
+		"semesters": semesters,
+		"subjects": subjects,
 	})
 	helper.PanicIfError(err)
 }

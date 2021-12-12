@@ -7,7 +7,7 @@ import (
 
 type NilaiSiswa interface {
 	GetData() ([]response.Mapel,[]response.Semester)
-	GetNilaiBySemester(userId string,semester string) []response.Nilai
+	GetNilai(userId string,semester string, subject string) []response.Nilai
 	GetNilaiById(gradeId string) (response.Nilai,[]response.Semester,[]response.Mapel)
 	Post(request request.Nilai) string
 	Update(gradeId string, request request.Nilai) string
