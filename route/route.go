@@ -16,7 +16,7 @@ const (
 	HAPUS_GURU = "/admin/data-guru/hapus/{userId}"
 	UPDATE_GURU = "/admin/data-guru/update/{userId}"
 
-	// kelola data suswa (CRUD)
+	// kelola data siswa (CRUD)
 	SISWA_DASHBOARD = "/admin/data-siswa"
 	TAMBAH_SISWA = "/admin/data-siswa/tambah"
 	HAPUS_SISWA = "/admin/data-siswa/hapus/{userId}"
@@ -63,4 +63,9 @@ const (
 	INPUT_NILAI_SISWA = "/admin/data-siswa/nilai/siswa/{userId}"
 	HAPUS_NILAI_SISWA = "/admin/data-siswa/nilai/hapus/{gradeId}"
 	UPDATE_NILAI_SISWA = "/admin/data-siswa/nilai/update/{gradeId}"
+
+	// Bayar SPP
+	GET_SISWA_SPP = "/admin/data-akuntansi/spp"
+	BAYAR_SPP_SISWA = "/admin/data-akuntansi/spp/{userId}"
+	DETAIL_SPP = "/admin/data-akuntansi/detail/siswa/{userId}"
 )

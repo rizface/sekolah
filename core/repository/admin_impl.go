@@ -54,6 +54,8 @@ func (a *admin) Post(request request.User, levelName string,db *gorm.DB) (bool,e
 		LevelId:      level.Id,
 		GenderId:     gender.Id,
 	})
+
+
 	return result.RowsAffected > 0,result.Error
 }
 

@@ -96,4 +96,10 @@ func Admin() {
 
 	crudDetailPegawai := CrudDetailPegawai()
 	r.HandleFunc(route.UPDATE_DETAIL_PEGAWAI,crudDetailPegawai.Post).Methods(http.MethodPost)
+
+	crudAkuntansi := crudAkuntansi()
+	r.HandleFunc(route.GET_SISWA_SPP,crudAkuntansi.GetStudets).Methods(http.MethodGet)
+	r.HandleFunc(route.BAYAR_SPP_SISWA,crudAkuntansi.PostPage).Methods(http.MethodGet)
+	r.HandleFunc(route.BAYAR_SPP_SISWA,crudAkuntansi.Post).Methods(http.MethodPost)
+	r.HandleFunc(route.DETAIL_SPP,crudAkuntansi.GetDetail).Methods(http.MethodGet)
 }

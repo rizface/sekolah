@@ -1,0 +1,52 @@
+{{define "spp_siswa"}}
+    {{template "_top-wrapper"}}
+
+    <div class="col-lg-12">
+        <div style="text-transform: capitalize" class="d-flex align-items-end flex-wrap">
+            <div class="mr-md-3 mr-xl-5">
+                <h2>Data Siswa,</h2>
+                <p class="mb-md-0">Pilih dan Bayar SPP</p>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4 class="card-title">Data Siswa</h4>
+                <p class="card-description">Pemabayaran SPP</p>
+                <div class="table-responsive" style="text-transform: capitalize">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nama Depan</th>
+                            <th>Nama Belakang</th>
+                            <th>Username</th>
+                            <th>Status Spp Bulan Ini</th>
+                            <th>Aksi</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{range .students}}
+                            <tr>
+                                <td>{{.NamaDepan}}</td>
+                                <td>{{.NamaBelakang}}</td>
+                                <td>{{.Username}}</td>
+                                <td>
+                                    {{if eq .Status "Sudah Bayar"}}
+                                        <p class="text-success">{{.Status}}</p>
+                                    {{else}}
+                                        <p class="text-danger">{{.Status}}</p>
+                                    {{end}}
+                                </td>
+                                <td>
+                                    <a href="/admin/data-akuntansi/spp/{{.Id}}" class="btn btn-primary btn-sm">Bayar</a>
+                                    <a href="/admin/data-akuntansi/detail/siswa/{{.Id}}" class="btn btn-success btn-sm">Detail</a>
+                                </td>
+                            </tr>
+                        {{end}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{template "_bottom-wrapper"}}
+{{end}}

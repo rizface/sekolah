@@ -1,0 +1,41 @@
+{{define "detail_spp_siswa"}}
+    {{template "_top-wrapper"}}
+    <div class="col-lg-12">
+        <div style="text-transform: capitalize" class="d-flex align-items-end flex-wrap">
+            <div class="mr-md-3 mr-xl-5">
+                <h2>Data Siswa,</h2>
+                <p class="mb-md-0">Pilih dan Bayar SPP</p>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4 class="card-title">Data Siswa</h4>
+                <p class="card-description">Pemabayaran SPP</p>
+                <div class="table-responsive" style="text-transform: capitalize">
+                    <table class="table table-hover">
+                        <thead>
+                        <tr>
+                            <th>Nama Siswa</th>
+                            <th>Nama Petugas</th>
+                            <th>Tanggal Dibayar</th>
+                            <th>Tanggal Lunas</th>
+                            <th>Jumlah</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{range .details}}
+                            <tr>
+                                <td>{{.NamaSiswa}}</td>
+                                <td>{{.NamaPetugas}}</td>
+                                <td>{{.TglBayar}}</td>
+                                <td>{{.TglLunas}}</td>
+                            </tr>
+                        {{end}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{template "_bottom-wrapper"}}
+{{end}}

@@ -33,9 +33,13 @@ func CrudKelasController() controller.AdminCrud {
 
 func CrudAssignStudentToClass() controller.Kelas {
 	repo := repository.NewKelas()
+	userRepo := repository.NewUser()
+
 	nilaiService := service2.NewNilaiSiswa(helper.Connection(),valid,repository.NewSemester(),repository.NewMapel(),repository.NewNilaiSiswa())
 	service := service2.NewKelas(helper.Connection(),valid,repo)
-	controller := controller.NewAssignStudent(service,nilaiService)
+	userService := service2.NewAdmin(helper.Connection(),valid,userRepo)
+
+	controller := controller.NewAssignStudent(service,nilaiService,userService)
 	return controller
 }
 
@@ -81,6 +85,15 @@ func CrudDetailPegawai() controller.DetailPegawai {
 	repo := repository.NewDetailPegawai()
 	service := service2.NewDetailPegawai(helper.Connection(),valid,repo)
 	controller := controller.NewDetailPegawai(service)
+	return controller
+}
+
+func crudAkuntansi() controller.Akuntansi {
+	sppRepo := repository.NewSpp()
+	sppService := service2.NewSpp(helper.Connection(),valid,sppRepo)
+	useRRepo := repository.NewUser()
+	userService := service2.NewAdmin(helper.Connection(),valid,useRRepo)
+	controller := controller.NewAkuntansi(userService,sppService)
 	return controller
 }
 

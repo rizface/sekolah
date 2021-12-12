@@ -1,0 +1,40 @@
+{{define "bayar_spp_siswa"}}
+    {{template "_top-wrapper"}}
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Bayar SPP</h4>
+                <p class="card-description">
+                    Bayar SPP Disini
+                </p>
+                <form class="forms-sample" method="post" action="/admin/data-akuntansi/spp/{{.data.Id}}">
+                    <div class="row">
+                        <input type="hidden" name="employee_id" value="{{.user.user_id}}">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Nama Siswa</label>
+                                <input disabled value="{{.data.NamaDepan}}" type="text" name="nama_depan" class="form-control" placeholder="Nama Depan">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Nama Belakang</label>
+                                <input disabled value="{{.data.NamaBelakang}}" type="text" name="nama_belakang" class="form-control" placeholder="Nama Belakang">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="form-group">
+                                <label for="exampleInputUsername1">Nominal</label>
+                                <input type="number" name="nominal" class="form-control" id="exampleInputUsername1" placeholder="Masukan Nominal Pembayaran">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Bayar</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{template "_bottom-wrapper"}}
+{{end}}
