@@ -15,28 +15,30 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table style="text-transform: capitalize" class="table table-hover">
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Kelas</th>
-                                    <th>Aksi</th>
-                                </tr>
-                                {{range .withClass}}
+                            <table style="text-transform: capitalize" class="table table-hover" id="table">
+                                <thead>
                                     <tr>
-                                        <td>{{.NamaDepan}} {{.NamaBelakang}}</td>
-                                        <td>{{.Tingkat}} - {{.Kelas}}</td>
-                                        <td>
-                                            <a href="/admin/data-kelas/siswa/{{.KelasId}}" class="btn btn-success btn-sm">
-                                                Lihat Kelas
-                                            </a>
-                                        </td>
-                                        <td>
-                                            <a href="/admin/data-kelas/wali-kelas/hapus/walas/{{.Id}}/kelas/{{.KelasId}}" class="btn btn-danger btn-sm">
-                                                Hapus
-                                            </a>
-                                        </td>
+                                        <th>Nama</th>
+                                        <th>Kelas</th>
+                                        <th>Aksi</th>
                                     </tr>
-                                {{end}}
+                                </thead>
+                                <tbody>
+                                    {{range .withClass}}
+                                        <tr>
+                                            <td>{{.NamaDepan}} {{.NamaBelakang}}</td>
+                                            <td>{{.Tingkat}} - {{.Kelas}}</td>
+                                            <td>
+                                                <a href="/admin/data-kelas/siswa/{{.KelasId}}" class="btn btn-success btn-sm">
+                                                    Lihat Kelas
+                                                </a>
+                                                <a href="/admin/data-kelas/wali-kelas/hapus/walas/{{.Id}}/kelas/{{.KelasId}}" class="btn btn-danger btn-sm">
+                                                    Hapus
+                                                </a>
+                                            </td>
+                                        </tr>
+                                    {{end}}
+                                </tbody>
                             </table>
                         </div>
                     </div>
@@ -50,30 +52,34 @@
                     </div>
                     <div class="card-body">
                         <div class="table-responsive">
-                            <table style="text-transform: capitalize" class="table table-hover">
-                                <tr>
-                                    <th>Nama</th>
-                                    <th>Pilih Kelas</th>
-                                    <th>Aksi</th>
-                                </tr>
-                                {{range .withoutClass}}
+                            <table style="text-transform: capitalize" class="table table-hover" id="table2">
+                                <thead>
                                     <tr>
-                                            <td>{{.NamaDepan}} {{.NamaBelakang}}</td>
-                                        <form action="/admin/data-kelas/wali-kelas" method="post">
-                                            <input type="hidden" name="idGuru" value="{{.Id}}">
-                                            <td>
-                                                <select class="form-control" name="idKelas" id="">
-                                                    {{ range $kelas}}
-                                                        <option value="{{.Id}}">{{.Tingkat}} - {{.Kelas}}</option>
-                                                    {{end}}
-                                                </select>
-                                            </td>
-                                            <td>
-                                                <button class="btn btn-primary btn-sm" type="submit">Tetapkan</button>
-                                            </td>
-                                        </form>
+                                        <th>Nama</th>
+                                        <th>Pilih Kelas</th>
+                                        <th>Aksi</th>
                                     </tr>
-                                {{end}}
+                                </thead>
+                                <tbody>
+                                    {{range .withoutClass}}
+                                        <tr>
+                                            <td>{{.NamaDepan}} {{.NamaBelakang}}</td>
+                                            <form action="/admin/data-kelas/wali-kelas" method="post">
+                                                <input type="hidden" name="idGuru" value="{{.Id}}">
+                                                <td>
+                                                    <select class="form-control" name="idKelas" id="">
+                                                        {{ range $kelas}}
+                                                            <option value="{{.Id}}">{{.Tingkat}} - {{.Kelas}}</option>
+                                                        {{end}}
+                                                    </select>
+                                                </td>
+                                                <td>
+                                                    <button class="btn btn-primary btn-sm" type="submit">Tetapkan</button>
+                                                </td>
+                                            </form>
+                                        </tr>
+                                    {{end}}
+                                </tbody>
                             </table>
                         </div>
                     </div>

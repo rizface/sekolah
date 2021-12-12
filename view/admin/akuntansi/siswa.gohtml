@@ -13,35 +13,35 @@
                 <h4 class="card-title">Data Siswa</h4>
                 <p class="card-description">Pemabayaran SPP</p>
                 <div class="table-responsive" style="text-transform: capitalize">
-                    <table class="table table-hover">
+                    <table class="table table-hover" id="table">
                         <thead>
-                        <tr>
-                            <th>Nama Depan</th>
-                            <th>Nama Belakang</th>
-                            <th>Username</th>
-                            <th>Status Spp Bulan Ini</th>
-                            <th>Aksi</th>
-                        </tr>
+                            <tr>
+                                <th>Nama Depan</th>
+                                <th>Nama Belakang</th>
+                                <th>Username</th>
+                                <th>Status Spp Bulan Ini</th>
+                                <th>Aksi</th>
+                            </tr>
                         </thead>
                         <tbody>
-                        {{range .students}}
-                            <tr>
-                                <td>{{.NamaDepan}}</td>
-                                <td>{{.NamaBelakang}}</td>
-                                <td>{{.Username}}</td>
-                                <td>
-                                    {{if eq .Status "Sudah Bayar"}}
-                                        <p class="text-success">{{.Status}}</p>
-                                    {{else}}
-                                        <p class="text-danger">{{.Status}}</p>
-                                    {{end}}
-                                </td>
-                                <td>
-                                    <a href="/admin/data-akuntansi/spp/{{.Id}}" class="btn btn-primary btn-sm">Bayar</a>
-                                    <a href="/admin/data-akuntansi/detail/siswa/{{.Id}}" class="btn btn-success btn-sm">Detail</a>
-                                </td>
-                            </tr>
-                        {{end}}
+                            {{range .students}}
+                                <tr>
+                                    <td>{{.NamaDepan}}</td>
+                                    <td>{{.NamaBelakang}}</td>
+                                    <td>{{.Username}}</td>
+                                    <td>
+                                        {{if eq .Status "Sudah Bayar"}}
+                                            <p class="text-success">{{.Status}}</p>
+                                        {{else}}
+                                            <p class="text-danger">{{.Status}}</p>
+                                        {{end}}
+                                    </td>
+                                    <td>
+                                        <a href="/admin/data-akuntansi/spp/{{.Id}}" class="btn btn-primary btn-sm">Bayar</a>
+                                        <a href="/admin/data-akuntansi/detail/siswa/{{.Id}}" class="btn btn-success btn-sm">Detail</a>
+                                    </td>
+                                </tr>
+                            {{end}}
                         </tbody>
                     </table>
                 </div>
