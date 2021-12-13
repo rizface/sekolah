@@ -30,7 +30,7 @@ func (s *spp) GetByUserId(db *gorm.DB, userId string) (app.MonthlyFee,error) {
 
 func (s *spp) GetDetailSpp(db *gorm.DB, userId string) ([]response.DetailSpp, error) {
 	var detail []response.DetailSpp
-	result := db.Select("CONCAT(s.nama_depan,' ',s.nama_belakang) AS nama_siswa, CONCAT(o.nama_depan,' ',o.nama_belakang) AS nama_petugas, TO_CHAR(monthly_fees.created_at - INTERVAL '1 Month','dd Monthyyyy') AS tgl_bayar, TO_CHAR(monthly_fees.created_at,'dd Monthyyyy') AS tgl_lunas").Joins("INNER JOIN users s ON s.id = monthly_fees.student_id INNER JOIN users o  ON o.id = monthly_fees.officer_id").Where("monthly_fees.student_id = ?", userId).Find(&[]app.MonthlyFee{}).Scan(&detail)
+	result := db.Select("CONCAT(s.nama_depan,' ',s.nama_belakang) AS nama_siswa, CONCAT(o.nama_depan,' ',o.nama_belakang) AS nama_petugas, TO_CHAR(monthly_fees.created_at - INTERVAL '1 Month','dd Monthyyyy') AS tgl_bayar, TO_CHAR(monthly_fees.created_at,'dd Monthyyyy') AS tgl_lunas").Joins("INNER JOIN users s ON s.id = monthly_fees.student_id LEFT JOIN users o  ON o.id = monthly_fees.officer_id").Where("monthly_fees.student_id = ?", userId).Find(&[]app.MonthlyFee{}).Scan(&detail)
 	return detail,result.Error
 }
 

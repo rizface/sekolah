@@ -2,7 +2,7 @@ package route
 
 const (
 	LOGIN = "/"
-
+	LOGOUT = "/logout"
 	// kelola data admin (CRUD)
 	ADMIN = "/admin"
 	ADMIN_DASHBOARD = "/admin/data-admin"

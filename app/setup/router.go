@@ -10,8 +10,12 @@ func Login() {
 	r := R.NewRoute().Subrouter()
 	controller := LoginController()
 
-	r.HandleFunc(route.LOGIN, controller.LoginPage).Methods(http.MethodGet)
-	r.HandleFunc(route.LOGIN, controller.Login).Methods(http.MethodPost)
+	guest := r.NewRoute().Subrouter()
+	guest.Use(middleware.Guest)
+	guest.HandleFunc(route.LOGIN, controller.LoginPage).Methods(http.MethodGet)
+	guest.HandleFunc(route.LOGIN, controller.Login).Methods(http.MethodPost)
+
+	r.HandleFunc(route.LOGOUT,controller.Logout).Methods(http.MethodGet)
 }
 
 func Admin() {

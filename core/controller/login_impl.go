@@ -35,3 +35,11 @@ func (l login) Login(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w,r,"/"+user.Level,http.StatusSeeOther)
 }
 
+func (l login) Logout(w http.ResponseWriter, r *http.Request) {
+	s,_ := helper.Store.Get(r,"user-data")
+	s.Options.MaxAge = -1
+	s.Save(r,w)
+	http.Redirect(w,r,"/",http.StatusSeeOther)
+}
+
+
