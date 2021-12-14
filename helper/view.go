@@ -35,3 +35,13 @@ func View(viewPath string)  ExecView {
 	admin.tmp = tmp
 	return admin
 }
+
+func ViewGuru(viewPath string) ExecView {
+	var guru ExecView
+	tmp.ParseFiles("view/nav/_sidebar-guru.gohtml")
+	tmp.ParseGlob("view/partials/*.gohtml")
+	tmp,err := tmp.ParseFiles(viewPath)
+	PanicIfError(err)
+	guru.tmp = tmp
+	return guru
+}

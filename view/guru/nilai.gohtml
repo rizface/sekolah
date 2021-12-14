@@ -1,0 +1,49 @@
+{{define "input_nilai"}}
+    {{template "_top-wrapper"}}
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Input Data Kelas</h4>
+                <p class="card-description">
+                    Masukan Data Kelas Disini
+                </p>
+                <form class="forms-sample" method="post" action="/guru/kelas/{{.kelasId}}/siswa/{{.siswaId}}">
+                    <div class="row">
+                        <input type="hidden" name="siswaId" value="{{.siswaId}}">
+                        <input type="hidden" name="guruId" value="{{.guruId}}">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Semester</label>
+                                <select name="semester" class="form-control">
+                                    <option  readonly selected>Pilih Semester</option>
+                                    {{range .semester}}
+                                        <option value="{{.Id}}">{{.Semester}}</option>
+                                    {{end}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Mata Pelajaran</label>
+                                <select name="mapel" class="form-control">
+                                    <option  readonly selected>Pilih Mata Pelajaran</option>
+                                    {{range .mapel}}
+                                        <option value="{{.Id}}">{{.Subject}}</option>
+                                    {{end}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Nilai</label>
+                                <input type="number" name="nilai" class="form-control" placeholder="Nilai" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{template "_bottom-wrapper"}}
+{{end}}

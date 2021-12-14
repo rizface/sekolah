@@ -106,6 +106,29 @@ func Dashboard() controller.Dashboard {
 	return controller.NewDashboard()
 }
 
+func controllerGuru() controller.Dashboard {
+	repo := repository.NewKelas()
+	service := service2.NewKelas(helper.Connection(),valid,repo)
+	return controller.NewGuru(service)
+}
+
+func controllerGuruMapel() controller.Guru {
+	db := helper.Connection()
+	repo := repository.NewGuruMapel()
+	service := service2.NewGuruMapel(db,repo)
+	kelasRepo := repository.NewKelas()
+	kelasService := service2.NewKelas(db,valid,kelasRepo)
+	mapelRepo := repository.NewMapel()
+	mapelService := service2.NewMapel(db,valid,mapelRepo)
+	semesterRepo := repository.NewSemester()
+	semesterService := service2.NewSemester(db,semesterRepo)
+	nilaiRepo := repository.NewNilaiSiswa()
+	subjectRepo := repository.NewMapel()
+	nilaiService := service2.NewNilaiSiswa(db,valid,semesterRepo,subjectRepo,nilaiRepo)
+
+	controller := controller.NewGuruMapel(service,kelasService,mapelService,semesterService,nilaiService)
+	return controller
+}
 //func CrudGuruController() controller.AdminCrud {
 //	repo := repository.NewUser()
 //	service := service2.NewCrudGuru(helper.Connection(),valid,repo)

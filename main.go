@@ -15,5 +15,6 @@ func init() {
 func main() {
 	setup.Login()
 	setup.Admin()
+	setup.Guru()
 	helper.StartServer(":8080",setup.R)
 }

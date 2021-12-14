@@ -24,7 +24,7 @@ func Admin() {
 
 	// Dashboard
 	dashboarad := Dashboard()
-	r.HandleFunc(route.ADMIN,dashboarad.DashboardAdmin).Methods(http.MethodGet)
+	r.HandleFunc(route.ADMIN,dashboarad.Dashboard).Methods(http.MethodGet)
 
 	// CRUD Admin
 	crudAdmin := CrudAdminController()
@@ -110,4 +110,19 @@ func Admin() {
 	r.HandleFunc(route.BAYAR_SPP_SISWA,crudAkuntansi.PostPage).Methods(http.MethodGet)
 	r.HandleFunc(route.BAYAR_SPP_SISWA,crudAkuntansi.Post).Methods(http.MethodPost)
 	r.HandleFunc(route.DETAIL_SPP,crudAkuntansi.GetDetail).Methods(http.MethodGet)
+}
+
+func Guru() {
+	dashboard := controllerGuru()
+	r := R
+	r.Use(middleware.Guru)
+	r.HandleFunc(route.GURU,dashboard.Dashboard).Methods(http.MethodGet)
+
+	mapel := controllerGuruMapel()
+	r.HandleFunc(route.GURU_MAPEL,mapel.GetMapel).Methods(http.MethodGet)
+	r.HandleFunc(route.GURU_KELAS,mapel.GetKelas).Methods(http.MethodGet)
+	r.HandleFunc(route.KELAS_SISWA, mapel.GetSiswaKelas).Methods(http.MethodGet)
+	r.HandleFunc(route.INPUT_NILAI,mapel.PostGradePage).Methods(http.MethodGet)
+	r.HandleFunc(route.INPUT_NILAI,mapel.PostGrade).Methods(http.MethodPost)
+	r.HandleFunc(route.GET_SISWA_NILAI,mapel.GetNilai).Methods(http.MethodGet)
 }

@@ -1,0 +1,42 @@
+{{define "data_mapel_guru"}}
+    {{template "_top-wrapper"}}
+
+    <div class="col-lg-12">
+        <div class="d-flex align-items-end flex-wrap">
+            <div class="mr-md-3 mr-xl-5">
+                <h2>Data Mata Pelajaran,</h2>
+                <p class="mb-md-0">Lihat Mata Pelajaran Diampu.</p>
+            </div>
+        </div>
+        <div class="card mt-3">
+            <div class="card-body">
+                <h4 class="card-title">Data Mata Pelajaran</h4>
+                <div class="table-responsive">
+                    <table class="table table-hover" style="text-transform: capitalize" id="table">
+                        <thead>
+                        <tr>
+                            <th>Mata Pelajaran</th>
+                            <th>Jumlah Tugas Sedang Berjalan</th>
+                            <th>Aksi</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        {{range .mapel}}
+                            <tr>
+                                <td>{{.Subject}}</td>
+                                <td>0</td>
+                                <td>
+                                    <a href="/guru/kelas" class="btn btn-primary btn-sm">Lihat Kelas</a>
+                                    <a href="/admin/data-mata-pelajaran/{{.Id}}/guru" class="btn btn-success btn-sm">Lihat Tugas</a>
+                                </td>
+                            </tr>
+                        {{end}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    {{template "_bottom-wrapper"}}
+{{end}}
