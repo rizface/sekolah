@@ -125,4 +125,7 @@ func Guru() {
 	r.HandleFunc(route.INPUT_NILAI,mapel.PostGradePage).Methods(http.MethodGet)
 	r.HandleFunc(route.INPUT_NILAI,mapel.PostGrade).Methods(http.MethodPost)
 	r.HandleFunc(route.GET_SISWA_NILAI,mapel.GetNilai).Methods(http.MethodGet)
+	r.HandleFunc(route.HAPUS_SISWA_NILAI,mapel.HapusNilai).Methods(http.MethodGet)
+	r.HandleFunc(route.UPDATE_SISWA_NILAI,mapel.UpdateNilaiPage).Methods(http.MethodGet)
+	r.HandleFunc(route.UPDATE_SISWA_NILAI,mapel.UpdateNilai).Methods(http.MethodPost)
 }

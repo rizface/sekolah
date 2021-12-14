@@ -9,4 +9,8 @@ type Guru interface {
 	PostGradePage(w http.ResponseWriter, r *http.Request)
 	PostGrade(w http.ResponseWriter, r *http.Request)
 	GetNilai(w http.ResponseWriter,r *http.Request)
+	HapusNilai(w http.ResponseWriter, r *http.Request)
+	UpdateNilaiPage(w http.ResponseWriter, r *http.Request)
+	UpdateNilai(w http.ResponseWriter, r *http.Request)
 }
+

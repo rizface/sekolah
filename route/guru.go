@@ -7,4 +7,6 @@ const(
 	KELAS_SISWA = "/guru/kelas/{kelasId}"
 	INPUT_NILAI = "/guru/kelas/{kelasId}/siswa/{siswaId}"
 	GET_SISWA_NILAI = "/guru/nilai/kelas/{kelasId}/siswa/{siswaId}"
+	HAPUS_SISWA_NILAI = "/guru/nilai/hapus/{nilaiId}"
+	UPDATE_SISWA_NILAI = "/guru/nilai/update/{nilaiId}"
 )

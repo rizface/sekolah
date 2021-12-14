@@ -1,0 +1,55 @@
+{{define "update_nilai"}}
+    {{template "_top-wrapper"}}
+    <div class="col-md-12 grid-margin stretch-card">
+        <div class="card">
+            <div class="card-body">
+                <h4 class="card-title">Input Nilai Siswa</h4>
+                <p class="card-description">
+                    Masukan Nilai Disini
+                </p>
+                {{$semester := .grades.Semester}}
+                {{$subject := .grades.Subject}}
+                <form class="forms-sample" method="post" action="/guru/nilai/update/{{.nilaiId}}">
+                    <div class="row">
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Semester</label>
+                                <select name="semester" class="form-control">
+                                    {{range .semesters}}
+                                        {{if eq .Id $semester}}
+                                            <option selected value="{{.Id}}">{{.Semester}}</option>
+                                        {{else}}
+                                            <option value="{{.Id}}">{{.Semester}}</option>
+                                        {{end}}
+                                    {{end}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Mata Pelajaran</label>
+                                <select name="mapel" class="form-control">
+                                    {{range .subjects}}
+                                        {{if eq .Id $subject}}
+                                            <option selected value="{{.Id}}">{{.Subject}}</option>
+                                        {{else}}
+                                            <option value="{{.Id}}">{{.Subject}}</option>
+                                        {{end}}
+                                    {{end}}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-4">
+                            <div class="form-group">
+                                <label for="">Nilai</label>
+                                <input value="{{.grades.Grade}}" type="number" name="nilai" class="form-control" placeholder="Nilai" step="0.1">
+                            </div>
+                        </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary mr-2">Submit</button>
+                </form>
+            </div>
+        </div>
+    </div>
+    {{template "_bottom-wrapper"}}
+{{end}}

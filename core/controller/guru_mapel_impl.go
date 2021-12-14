@@ -100,12 +100,45 @@ func (g *guruMapel) GetNilai(w http.ResponseWriter, r *http.Request) {
 	semesters:= g.semesterService.GetSemester()
 	subjects := g.mapelService.Get()
 
-	tmp := helper.View("view/guru/detail_nilai.gohtml")
+	tmp := helper.ViewGuru("view/guru/detail_nilai.gohtml")
 	err := tmp.Exec(w, r, "detail_nilai", map[string]interface{}{
 		"grades": grade,
 		"semesters": semesters,
 		"subjects": subjects,
 	})
 	helper.PanicIfError(err)
+}
+
+func (g *guruMapel) HapusNilai(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	result := g.nilaiService.Delete(params["nilaiId"])
+	helper.Notif("Notification", result)
+	http.Redirect(w,r,r.Referer(),http.StatusSeeOther)
+}
+
+func (g *guruMapel) UpdateNilaiPage(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	grade,semesters,subjects := g.nilaiService.GetNilaiById(params["nilaiId"])
+	tmp := helper.ViewGuru("view/guru/update_nilai.gohtml")
+	err := tmp.Exec(w, r, "update_nilai", map[string]interface{}{
+		"grades": grade,
+		"semesters": semesters,
+		"subjects": subjects,
+		"nilaiId": params["nilaiId"],
+	})
+	helper.PanicIfError(err)
+}
+
+func (g *guruMapel) UpdateNilai(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	s,_ := strconv.ParseFloat(r.PostFormValue("nilai"),64)
+	request := request2.Nilai{
+		SemesterId: r.PostFormValue("semester"),
+		SubjectId:  r.PostFormValue("mapel"),
+		Grade:      s,
+	}
+	result := g.nilaiService.Update(params["nilaiId"],request)
+	helper.Notif("Notification", result)
+	http.Redirect(w,r,r.Referer(),http.StatusSeeOther)
 }
 
