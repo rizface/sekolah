@@ -15,6 +15,5 @@ func CreateSession(w http.ResponseWriter, r *http.Request,data response.Login) {
 	session.Values["nama_belakang"] = data.NamaBelakang
 	session.Values["username"] = data.Username
 	session.Values["level"] = data.Level
-	session.Options.MaxAge = 60 * 10
 	session.Save(r,w)
 }

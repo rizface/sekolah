@@ -11,7 +11,7 @@
             <div class="col-md-12">
                 <div class="card mt-3">
                     <div class="card-header bg-primary">
-                        <h3 class="card-title text-white">Anggota Kelas</h3>
+                        <h3 class="text-white">Anggota Kelas</h3>
                     </div>
                     <div class="card-body">
                         {{$kelas := .kelasId}}
@@ -30,8 +30,7 @@
                                             <td>
                                                 <a href="/guru/kelas/{{$kelas}}/siswa/{{$student.Id}}" class="btn btn-primary btn-sm">Input Nilai</a>
                                                 <a href="/guru/nilai/kelas/{{$kelas}}/siswa/{{$student.Id}}" class="btn btn-warning btn-sm text-white">Lihat Nilai</a>
-                                                <a href="" class="btn btn-success btn-sm">Detail</a>
-                                                <a href="" class="btn btn-danger btn-sm">Absen</a>
+                                                <a href="/guru/siswa/{{$student.Id}}" class="btn btn-success btn-sm">Detail</a>
                                             </td>
                                         </tr>
                                     {{end}}

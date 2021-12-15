@@ -118,15 +118,24 @@ func controllerGuruMapel() controller.Guru {
 	service := service2.NewGuruMapel(db,repo)
 	kelasRepo := repository.NewKelas()
 	kelasService := service2.NewKelas(db,valid,kelasRepo)
+
 	mapelRepo := repository.NewMapel()
 	mapelService := service2.NewMapel(db,valid,mapelRepo)
+
 	semesterRepo := repository.NewSemester()
 	semesterService := service2.NewSemester(db,semesterRepo)
+
 	nilaiRepo := repository.NewNilaiSiswa()
 	subjectRepo := repository.NewMapel()
 	nilaiService := service2.NewNilaiSiswa(db,valid,semesterRepo,subjectRepo,nilaiRepo)
 
-	controller := controller.NewGuruMapel(service,kelasService,mapelService,semesterService,nilaiService)
+	userRepo := repository.NewUser()
+	userService := service2.NewAdmin(db,valid,userRepo)
+
+	absenRepo := repository.NewAbsen()
+	absenService := service2.NewAbsen(db,absenRepo)
+
+	controller := controller.NewGuruMapel(service,kelasService,mapelService,semesterService,nilaiService,userService,absenService)
 	return controller
 }
 //func CrudGuruController() controller.AdminCrud {

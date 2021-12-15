@@ -12,5 +12,8 @@ type Guru interface {
 	HapusNilai(w http.ResponseWriter, r *http.Request)
 	UpdateNilaiPage(w http.ResponseWriter, r *http.Request)
 	UpdateNilai(w http.ResponseWriter, r *http.Request)
+	GetDetailSiswa(w http.ResponseWriter, r *http.Request)
+	AbsenPage(w http.ResponseWriter, r *http.Request)
+	Absen(w http.ResponseWriter, r *http.Request)
 }
 

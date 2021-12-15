@@ -3,6 +3,9 @@
         <div class="row">
             <div class="col-md-12">
                 <div class="card">
+                    <div class="card-header bg-primary text-white">
+                        <h3>Kelas  </h3>
+                    </div>
                     <div class="card-body">
                         <table class="table table-hover" id="table">
                         <thead>
@@ -17,6 +20,7 @@
                                     <td>{{.Tingkat}} - {{.Kelas}}</td>
                                     <td>
                                         <a href="/guru/kelas/{{.Id}}" class="btn btn-primary btn-sm">Detail</a>
+                                        <a href="/guru/absen/kelas/{{.Id}}" class="btn btn-danger btn-sm">Absen</a>
                                     </td>
                                 </tr>
                             {{end}}

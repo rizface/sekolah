@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"github.com/rizface/sekolah/helper"
 	"net/http"
 )
@@ -12,7 +13,7 @@ func Guru(next http.Handler) http.Handler {
 		if level == "guru" {
 			next.ServeHTTP(writer,request)
 		} else {
-			http.Redirect(writer,request,request.Referer(),http.StatusSeeOther)
+			http.Redirect(writer,request,fmt.Sprintf("/%s",level),http.StatusSeeOther)
 		}
 	})
 }

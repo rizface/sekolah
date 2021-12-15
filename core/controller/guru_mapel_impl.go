@@ -16,19 +16,24 @@ type guruMapel struct{
 	mapelService service.Mapel
 	semesterService service.Semester
 	nilaiService service.NilaiSiswa
+	userService service.AdminCrud
+	absenService service.Absen
 }
 
-func NewGuruMapel(service service.GuruMapel, kelasService service.Kelas, mapelService service.Mapel, semesterService service.Semester,nilaiService service.NilaiSiswa) Guru {
+func NewGuruMapel(service service.GuruMapel, kelasService service.Kelas, mapelService service.Mapel, semesterService service.Semester,nilaiService service.NilaiSiswa, userService service .AdminCrud, absenService service.Absen) Guru {
 	return &guruMapel{
 		service: service,
 		kelasService: kelasService,
 		mapelService: mapelService,
 		semesterService: semesterService,
 		nilaiService: nilaiService,
+		userService: userService,
+		absenService: absenService,
 	}
 }
 
 func (g *guruMapel) GetMapel(w http.ResponseWriter, r *http.Request) {
+	fmt.Println("masuk")
 	s,_ := helper.Store.Get(r,"user-data")
 	subjects := g.service.GetMapel(s.Values["user_id"])
 	tmp := helper.ViewGuru("view/guru/mapel.gohtml")
@@ -142,3 +147,40 @@ func (g *guruMapel) UpdateNilai(w http.ResponseWriter, r *http.Request) {
 	http.Redirect(w,r,r.Referer(),http.StatusSeeOther)
 }
 
+func (g *guruMapel) GetDetailSiswa(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	siswaId := params["siswaId"]
+	detail := g.userService.DetailById("murid",siswaId);
+	general := g.userService.GetById(siswaId);
+	absen := g.absenService.GetStudentAbsent(siswaId)
+	fmt.Println(absen)
+	tmp := helper.ViewGuru("view/guru/detail_siswa.gohtml")
+	err := tmp.Exec(w,r,"detail_siswa",map[string]interface{} {
+		"general": general,
+		"detail": detail,
+		"absen": absen,
+	})
+	helper.PanicIfError(err)
+}
+
+func (g *guruMapel) AbsenPage(w http.ResponseWriter, r *http.Request) {
+	params := mux.Vars(r)
+	kelasId := params["kelasId"]
+	students,_ := g.kelasService.GetStudent(kelasId)
+	subjects := g.mapelService.Get()
+	tmp := helper.ViewGuru("view/guru/absen.gohtml")
+	err := tmp.Exec(w,r,"absen",map[string]interface{} {
+		"students": students,
+		"subjects": subjects,
+		"kelasId": kelasId,
+	})
+	helper.PanicIfError(err)
+}
+
+func (g *guruMapel) Absen(w http.ResponseWriter, r *http.Request) {
+	err := r.ParseForm()
+	helper.PanicIfError(err)
+	result := g.absenService.Absen(r.PostFormValue("subjectId"),r.PostForm["absen"])
+	helper.Notif("Notification",result)
+	http.Redirect(w,r,r.Referer(),http.StatusSeeOther)
+}

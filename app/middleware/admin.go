@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"github.com/rizface/sekolah/helper"
 	"net/http"
 )
@@ -8,8 +9,9 @@ import (
 func Admin(next http.Handler) http.Handler {
 	return http.HandlerFunc(func(writer http.ResponseWriter, request *http.Request) {
 		s,_ := helper.Store.Get(request,"user-data")
-		if s.Values["level"] != "admin" {
-			http.Redirect(writer,request,request.Referer(),http.StatusSeeOther)
+		level := s.Values["level"]
+		if  level != "admin" {
+			http.Redirect(writer,request,fmt.Sprintf("/%s",level),http.StatusSeeOther)
 		} else {
 			next.ServeHTTP(writer,request)
 		}

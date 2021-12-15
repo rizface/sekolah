@@ -2,6 +2,7 @@ package service
 
 import (
 	"errors"
+	"fmt"
 	"github.com/go-playground/validator/v10"
 	"github.com/rizface/sekolah/app/model/request"
 	"github.com/rizface/sekolah/app/model/response"
@@ -77,6 +78,7 @@ func (a *admin) DetailById(level string, userId string) interface{} {
 	var result interface{}
 	var err error
 	if level == "murid" {
+		fmt.Println(userId)
 		result,err = a.repo.StudentDetail(a.db,userId)
 		checkErrorType(err)
 	} else {

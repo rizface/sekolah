@@ -1,0 +1,77 @@
+{{define "detail_siswa"}}
+    {{template "_top-wrapper"}}
+    <div class="row">
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3>Riwayat Absen</h3>
+                </div>
+                <div class="card-body">
+                    <table class="table table-hover table-responsive" id="table">
+                        <thead>
+                            <tr>
+                                <th>Mata Pelajaran</th>
+                                <th>Keterangan</th>
+                                <th>Tanggal</th>
+                                <th>Aksi</th>
+                            </tr>
+                        </thead>
+                        <tbody style="text-transform: capitalize">
+                            {{range .absen}}
+                                <tr>
+                                    <td>{{.Mapel}}</td>
+                                    {{if eq .Keterangan "hadir"}}
+                                        <td class="text-success">{{.Keterangan}}</td>
+                                    {{else}}
+                                        <td class="text-danger">{{.Keterangan}}</td>
+                                    {{end}}
+                                    <td>{{.Tgl}}</td>
+                                    <td>
+                                        <a href="" class="btn btn-warning btn-sm text-white">Update</a>
+                                    </td>
+                                </tr>
+                            {{end}}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <div class="card">
+                <div class="card-header bg-primary text-white">
+                    <h3>Data Detail Siswa</h3>
+                </div>
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Nama Depan</label>
+                                <input type="text" class="form-control" disabled value="{{.general.NamaDepan}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">Nama Belakang</label>
+                                <input type="text" class="form-control" disabled value="{{.general.NamaBelakang}}">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">NISN</label>
+                                <input type="text" class="form-control" disabled value="{{.detail.Nisn}}">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label for="">NIS</label>
+                                <input type="text" class="form-control" disabled value="{{.detail.Nis}}">
+                            </div>
+                        </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {{template "_bottom-wrapper"}}
+{{end}}

@@ -20,6 +20,7 @@ func Login() {
 
 func Admin() {
 	r := R.NewRoute().Subrouter()
+	r.Use(middleware.Auth)
 	r.Use(middleware.Admin)
 
 	// Dashboard
@@ -114,7 +115,8 @@ func Admin() {
 
 func Guru() {
 	dashboard := controllerGuru()
-	r := R
+	r := R.NewRoute().Subrouter()
+	r.Use(middleware.Auth)
 	r.Use(middleware.Guru)
 	r.HandleFunc(route.GURU,dashboard.Dashboard).Methods(http.MethodGet)
 
@@ -128,4 +130,7 @@ func Guru() {
 	r.HandleFunc(route.HAPUS_SISWA_NILAI,mapel.HapusNilai).Methods(http.MethodGet)
 	r.HandleFunc(route.UPDATE_SISWA_NILAI,mapel.UpdateNilaiPage).Methods(http.MethodGet)
 	r.HandleFunc(route.UPDATE_SISWA_NILAI,mapel.UpdateNilai).Methods(http.MethodPost)
+	r.HandleFunc(route.DETAIL_SISWA,mapel.GetDetailSiswa).Methods(http.MethodGet)
+	r.HandleFunc(route.ABSEN_SISWA, mapel.AbsenPage).Methods(http.MethodGet)
+	r.HandleFunc(route.ABSEN_SISWA, mapel.Absen).Methods(http.MethodPost)
 }
